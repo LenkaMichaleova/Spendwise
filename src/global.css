@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --backgroundColor: #E3EFF7;
+  --primaryColor: #002374;
+  --secondaryColor: #f7f7f7;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: var(--backgroundColor);
+  background-image: url("../public/bankovka2.png");
+  background-size: 120%;
+  background-position: top;
+  background-repeat: no-repeat;
+  color: var(--primaryColor);
+}
+
+@media (min-width: 1000px) {
+  body {
+    background-image: none;
+    background-color: var(--secondaryColor);
+    margin: 0;
+  }
+
+  .app-main {
+    display: flex;
+  }
+
+  /* MAIN */
+  .ocr-page {
+    width: 80%;
+  }
+
+  /* MOBILE MODE */
+  .mobile-mode {
+    display: none;
+  }
+}

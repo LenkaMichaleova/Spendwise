@@ -1,0 +1,27 @@
+/* NAVIGACE PC */
+
+.navigace__PC-mode {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .navigace__PC-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: var(--primaryColor);
+    height: 100vh;
+    padding: 3%;
+  }
+
+  .navigace__PC-mode a {
+    color: var(--secondaryColor);
+    text-decoration: none;
+  }
+
+  .ikon {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}

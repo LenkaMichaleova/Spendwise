@@ -1,0 +1,19 @@
+/* FOOTER */
+
+footer {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--secondaryColor);
+
+    font-size: smaller;
+    color: grey;
+    border-top: 1px solid silver;
+    padding: 0.1rem;
+  }
+}

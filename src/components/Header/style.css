@@ -1,0 +1,55 @@
+/* HLAVIČKA */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.app-header--left,
+.app-header--right {
+  margin: 0 2%;
+  display: flex;
+  gap: 3%;
+  color: var(--primaryColor);
+}
+
+.app-header--left {
+  font-size: 0.8rem;
+}
+
+.app-header--right {
+  font-size: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 2%;
+  right: 2%;
+}
+
+.logo {
+  width: 4rem;
+  height: 4rem;
+  background-image: url(./img/kelímek.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  align-self: center;
+}
+
+.name {
+  align-self: center;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 1000px) {
+  .app-header {
+    background-color: var(--secondaryColor);
+    background-image: url("../../../public/bankovka2.png");
+    background-size: 5%;
+    border-bottom: 1px solid silver;
+    padding: 0.5rem;
+  }
+
+  .app-header--right {
+    position: initial;
+  }
+}
