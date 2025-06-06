@@ -27,12 +27,13 @@
 }
 
 .logo {
-  width: 4rem;
-  height: 4rem;
-  background-image: url(./img/kelímek.png);
+  width: 3rem;
+  height: 3rem;
+  background-image: url(./img/logo1.png);
   background-size: contain;
   background-repeat: no-repeat;
   align-self: center;
+  border-radius: 0.5rem;
 }
 
 .name {
