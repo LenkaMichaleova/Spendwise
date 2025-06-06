@@ -1,10 +1,11 @@
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Link, Outlet } from 'react-router-dom';
 
+import './global.css';
+
+import { TitlePage } from './components/TitlePage';
 import { HomePage } from './pages/HomePage';
 
-
-import './global.css';
 import { Header } from './components/Header';
 import { NavMobile } from './components/NavMobile';
 import { NavPC } from './components/NavPC';
@@ -35,11 +36,11 @@ const ErrorPage = () => {
 }
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <TitlePage />,
-  //   errorElement: <ErrorPage />,
-  // },
+  {
+    path: "/",
+    element: <TitlePage />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: '/',
     element: <App />,
