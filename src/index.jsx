@@ -1,15 +1,12 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Link,
-  Outlet,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Link, Outlet } from 'react-router-dom';
+
+import { HomePage } from './pages/HomePage';
+
 
 import './global.css';
-import { NavMobile } from './components/NavMobile';
 import { Header } from './components/Header';
+import { NavMobile } from './components/NavMobile';
 import { NavPC } from './components/NavPC';
 import { Footer } from './components/Footer';
 
@@ -27,33 +24,39 @@ const App = () => {
   );
 };
 
-const Home = () => (
-  <section>
-    <h2>Home</h2>
-    <p>Welcome</p>
-  </section>
-);
-
-const Stats = () => (
-  <section>
-    <h2>Statistics</h2>
-    <p>Some awesome graphs here</p>
-  </section>
-);
+const ErrorPage = () => {
+  const name = localStorage.getItem("userName")
+  return (
+    <div>
+      <p>404: Tady nic není, vrať se zpět</p>
+      <Link to={name ? "/HomePage" : "/"}>Zpět</Link>
+    </div>
+  )
+}
 
 const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <TitlePage />,
+  //   errorElement: <ErrorPage />,
+  // },
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: 'home',
-        element: <Home />,
+        path: '/HomePage',
+        element: <HomePage />,
       },
-      {
-        path: 'statistics',
-        element: <Stats />,
-      },
+      // {
+      //   path: '/Stats',
+      //   element: <StatsPage />,
+      // },
+      // {
+      //   path: "/Menu",
+      //   element: <OCRPage />,
+      // },
     ],
   },
 ]);
