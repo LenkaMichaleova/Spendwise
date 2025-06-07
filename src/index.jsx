@@ -5,6 +5,7 @@ import './global.css';
 
 import { TitlePage } from './components/TitlePage';
 import { HomePage } from './pages/HomePage';
+import { OCRPage } from './pages/OCRPage';
 
 import { Header } from './components/Header';
 import { NavMobile } from './components/NavMobile';
@@ -54,10 +55,10 @@ const router = createBrowserRouter([
       //   path: '/Stats',
       //   element: <StatsPage />,
       // },
-      // {
-      //   path: "/Menu",
-      //   element: <OCRPage />,
-      // },
+      {
+        path: "/Menu",
+        element: <OCRPage />,
+      },
     ],
   },
 ]);
