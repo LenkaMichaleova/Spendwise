@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 }
 
 .add-spending-content {
@@ -37,5 +38,5 @@
 
 .save-btn {
   width: 100%;
-  height: 35px;
+  height: 50px;
 }
