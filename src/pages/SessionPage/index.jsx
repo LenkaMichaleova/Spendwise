@@ -5,6 +5,8 @@ import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { ReusableBtn } from '../../components/ReusableBtn';
+import { AddSpending } from '../../components/AddSpending';
 
 const polozky = [
   {id: 1, name: 'knedlo vepřo zelo', price: 250},
@@ -13,6 +15,7 @@ const polozky = [
 ]
 
 export const SessionPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [items, setItems] = useState(polozky)
   const navigate = useNavigate()
   
@@ -29,6 +32,12 @@ export const SessionPage = () => {
           <span>Menu</span>
         </div>
       </div>
+
+      <div className='session-btn'>
+        <ReusableBtn title="Add Spending" onClick={() => setIsModalOpen(true)}/>
+      </div>
+
+      <AddSpending isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
 
       <div className='session__items-box'>
         {items.map((item, index) => 

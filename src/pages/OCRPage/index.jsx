@@ -49,7 +49,7 @@ export const OCRPage = () => {
         ${text}
         Přečti prosím všechny položky z tohoto jídelního lístku a vrať mi je ve formátu JSON. Struktura by měla být: {"items": [{"name": "název jídla", "price": "cena", "description": "popis (pokud je k dispozici)"}]}. Pokud není cena jasná, nastav ji na null.
       `;
-
+      console.log(prompt.split(" ").length)
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -57,7 +57,7 @@ export const OCRPage = () => {
           "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
         },
         body: JSON.stringify({
-          model: "gpt-4",
+          model: "gpt-4o-mini",
           messages: [
             { role: "system", content: "Jsi pomocník pro strukturování textu." },
             { role: "user", content: prompt }

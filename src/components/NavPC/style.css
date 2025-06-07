@@ -4,10 +4,11 @@
   display: none;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
   .navigace__PC-mode {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 3rem;
     background-color: var(--primaryColor);
     height: 100vh;

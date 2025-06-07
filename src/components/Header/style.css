@@ -3,11 +3,12 @@
 .app-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .app-header--left,
 .app-header--right {
-  margin: 0 2%;
+  margin: 2% 4%;
   display: flex;
   gap: 3%;
   color: var(--primaryColor);
@@ -21,7 +22,6 @@
   font-size: 0.6rem;
   display: flex;
   flex-direction: column;
-  position: fixed;
   top: 2%;
   right: 2%;
 }
@@ -41,13 +41,18 @@
   font-size: 0.8rem;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
   .app-header {
     background-color: var(--secondaryColor);
     background-image: url("../../../public/bankovka2.webp");
     background-size: 5%;
     border-bottom: 1px solid silver;
     padding: 0.5rem;
+  }
+
+  .app-header--left,
+  .app-header--right {
+    margin: 0 2%;
   }
 
   .app-header--right {
