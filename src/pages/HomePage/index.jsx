@@ -1,3 +1,4 @@
+import { AddSpending } from '../../components/AddSpending';
 import { SpeedDialTooltipOpen } from '../../components/SpeedDial';
 import './style.css';
 
@@ -12,8 +13,7 @@ export const HomePage = () => {
           </button>
         </div>
 
-
-
+        <AddSpending />
         <SpeedDialTooltipOpen />
     </div>
   );

@@ -1,0 +1,31 @@
+.add-spending-content {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  margin: 15% auto;
+  width: 300px;
+  text-align: center;
+  gap: 0.2rem;
+
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+
+.close-btn {
+  display: flex;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.save-btn {
+  margin-top: 5%;
+}
+
+#select {
+  padding: 2px;
+}
