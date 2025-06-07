@@ -15,7 +15,7 @@ import { StatsPage } from './pages/StatsPage';
 
 const App = () => {
   return (
-    <div className='app'>
+    <>
       <Header />
       <div className="app-main">
         <NavPC />
@@ -23,7 +23,7 @@ const App = () => {
       </div>
       <NavMobile />
       <Footer />
-    </div>
+    </>
   );
 };
 

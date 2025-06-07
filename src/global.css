@@ -12,6 +12,7 @@
 
 html {
   font-family: 'Open Sans', sans-serif;
+  height: 100%;
 }
 
 body {
@@ -21,6 +22,20 @@ body {
   background-position: top;
   background-repeat: no-repeat;
   color: var(--primaryColor);
+  margin: 0;
+  min-height: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-main {
+  display: flex;
+  flex: 1;
+  position: relative;
 }
 
 @media (min-width: 1000px) {
@@ -28,10 +43,6 @@ body {
     background-image: none;
     background-color: var(--secondaryColor);
     margin: 0;
-  }
-
-  .app-main {
-    display: flex;
   }
 
   /* MAIN */

@@ -18,7 +18,7 @@ export const SpeedDialTooltipOpen = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box sx={{ height: 330, transform: 'translateZ(0px)', flexGrow: 1 }}>
+    <Box sx={{ position:"fixed", bottom:80, right:16, zIndex:99 }}>
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
