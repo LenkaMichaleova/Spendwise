@@ -81,6 +81,8 @@ export const TitlePage = () => {
 
   const userName = localStorage.getItem('userName');
 
+  const [isUser, setIsUser] = useState(false);
+
   // localStorage.clear();
   // localStorage.removeItem();
 
@@ -98,16 +100,28 @@ export const TitlePage = () => {
   return (
     <div className="title-page">
       <div className="title-page__header">
-        <h1>Welcome {userName && ` back, ${userName}!`}</h1>
-        <p>Track your spending</p>
-        <p>Pay what's fair</p>
+        <div className="title-logo">
+          <img
+            className="logo-image"
+            src="src\components\Header\img\logo1.png"
+            alt="logo"
+          ></img>
+          <p>Spendwise</p>
+        </div>
+        <div className="title-page__heading">
+          <div className="welcome">
+            Welcome {userName && ` back, ${userName}!`}
+          </div>
+          <div>Track your spending</div>
+          <div>Pay what's fair</div>
+        </div>
       </div>
 
       {!userName ? (
-        <form onSubmit={handleSubmit}>
+        <form className="title-page__form" onSubmit={handleSubmit}>
           <div className="title-page__name">
             <TextField
-              sx={{ '& .MuiInputBase-root': { height: '50px' } }}
+              sx={{ '& .MuiInputBase-root': { height: '50px', width: '100%' } }}
               onChange={(e) => setName(e.target.value)}
               type="text"
               value={name}
@@ -136,7 +150,14 @@ export const TitlePage = () => {
         </form>
       ) : (
         <Link to="/HomePage" className="title-page__button">
-          Start Spending
+          <Button
+            className="save-btn"
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: 'var(--primaryColor)' }}
+          >
+            Start Spending
+          </Button>
         </Link>
       )}
     </div>
