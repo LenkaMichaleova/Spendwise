@@ -21,12 +21,6 @@ import { SessionPage } from './pages/SessionPage';
 import { useEffect } from 'react';
 
 const App = () => {
-  useEffect(() => {
-    const handleUserName = () => {};
-    window.addEventListener('storage');
-    return () => clearTimeout(timer, handleUserName);
-  }, []);
-
   return (
     <>
       <Header />
@@ -51,18 +45,18 @@ const ErrorPage = () => {
 };
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <TitlePage />,
-  //   errorElement: <ErrorPage />,
-  // },
+  {
+    path: '/',
+    element: <TitlePage />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        path: '/HomePage',
         element: <HomePage />,
       },
       {
