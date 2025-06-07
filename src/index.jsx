@@ -11,6 +11,7 @@ import { Header } from './components/Header';
 import { NavMobile } from './components/NavMobile';
 import { NavPC } from './components/NavPC';
 import { Footer } from './components/Footer';
+import { StatsPage } from './pages/StatsPage';
 
 const App = () => {
   return (
@@ -51,10 +52,10 @@ const router = createBrowserRouter([
         path: '/HomePage',
         element: <HomePage />,
       },
-      // {
-      //   path: '/Stats',
-      //   element: <StatsPage />,
-      // },
+      {
+        path: '/Stats',
+        element: <StatsPage />,
+      },
       {
         path: "/Menu",
         element: <OCRPage />,
