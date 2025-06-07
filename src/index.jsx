@@ -1,5 +1,10 @@
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Link, Outlet } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Link,
+  Outlet,
+} from 'react-router-dom';
 
 import './global.css';
 
@@ -13,6 +18,7 @@ import { NavPC } from './components/NavPC';
 import { Footer } from './components/Footer';
 import { StatsPage } from './pages/StatsPage';
 import { SessionPage } from './pages/SessionPage';
+import { useEffect } from 'react';
 
 const App = () => {
   return (
@@ -29,18 +35,18 @@ const App = () => {
 };
 
 const ErrorPage = () => {
-  const name = localStorage.getItem("userName")
+  const name = localStorage.getItem('userName');
   return (
     <div>
       <p>404: Tady nic není, vrať se zpět</p>
-      <Link to={name ? "/HomePage" : "/"}>Zpět</Link>
+      <Link to={name ? '/HomePage' : '/'}>Zpět</Link>
     </div>
-  )
-}
+  );
+};
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <TitlePage />,
     errorElement: <ErrorPage />,
   },
@@ -62,7 +68,7 @@ const router = createBrowserRouter([
         element: <StatsPage />,
       },
       {
-        path: "/Menu",
+        path: '/Menu',
         element: <OCRPage />,
       },
     ],
