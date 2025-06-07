@@ -1,31 +1,31 @@
-.add-spending-content {
+.add-spending-modal {
+  position: relative;
   display: flex;
   flex-direction: column;
-  background: white;
-  padding: 20px;
-  margin: 15% auto;
-  width: 300px;
-  text-align: center;
-  gap: 0.2rem;
-
   justify-content: center;
   align-items: center;
 
+
 }
 
 
+.add-spending-content {
+  background-color: white;
+  flex-direction: column;
+  display: flex;
+  padding: 2%;
+  justify-content: center;
+  align-items: center;
+}
 
 .close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.inputs {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  width: 20px;
-  height: 20px;
-}
-
-.save-btn {
-  margin-top: 5%;
-}
-
-#select {
-  padding: 2px;
 }
