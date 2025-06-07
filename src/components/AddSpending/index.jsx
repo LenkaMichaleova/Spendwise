@@ -7,9 +7,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import CloseIcon from '@mui/icons-material/Close';
+import Dialog from '@mui/material/Dialog';
 
-export const AddSpending = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const AddSpending = ({ isModalOpen, setIsModalOpen }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [tag, setTag] = useState('');
@@ -21,28 +21,20 @@ export const AddSpending = () => {
   };
 
   return (
-    <div className="add-spending-modal">
-      <button onClick={() => setIsOpen(true)}> Add Spending</button>
-
-      {isOpen && (
+    <Dialog open={isModalOpen}>
+      <div className="add-spending-modal">
         <div className="add-spending-content">
           <form onSubmit={handleSubmit}>
             <div className="form-header">
               <h3>Add spending</h3>
               <div className="close-btn">
-                <CloseIcon onClick={() => setIsOpen(false)} />
+                <CloseIcon onClick={() => setIsModalOpen(false)} />
               </div>
             </div>
 
             <div className="inputs">
               <TextField
-                slotProps={{
-                  htmlInput: {
-                    style: {
-                      height: '10px',
-                    },
-                  },
-                }}
+                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
                 className="input"
                 onChange={(e) => setName(e.target.value)}
                 type="text"
@@ -53,13 +45,7 @@ export const AddSpending = () => {
               />
 
               <TextField
-                slotProps={{
-                  htmlInput: {
-                    style: {
-                      height: '10px',
-                    },
-                  },
-                }}
+                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
                 className="input"
                 onChange={(e) => setPrice(e.target.value)}
                 type="number"
@@ -71,7 +57,7 @@ export const AddSpending = () => {
               <FormControl className="input">
                 <InputLabel>Tag</InputLabel>
                 <Select
-                  style={{ height: 35 }}
+                  style={{ height: 50 }}
                   value={tag}
                   label="Tag"
                   onChange={(e) => setTag(e.target.value)}
@@ -89,13 +75,18 @@ export const AddSpending = () => {
                 </Select>
               </FormControl>
 
-              <Button className="save-btn" type="submit" variant="contained">
+              <Button
+                className="save-btn"
+                type="submit"
+                variant="contained"
+                style={{ backgroundColor: 'var(--primaryColor)' }}
+              >
                 Save
               </Button>
             </div>
           </form>
         </div>
-      )}
-    </div>
+      </div>
+    </Dialog>
   );
 };
