@@ -1,0 +1,25 @@
+.session__item {
+  padding: 3%;
+  background-color: var(--secondaryColor);
+  color: var(--primaryColor);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 30px 5px rgba(0,0,0,0.2);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.session__item__name {
+  width: 60%;
+  text-align: start;
+}
+
+.session__item__others {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1;
+}

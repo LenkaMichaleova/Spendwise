@@ -3,36 +3,32 @@
   width: 100%;
 }
 
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.session-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.session-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .session__items-box {
   width: 90vw;
   display: flex;
   flex-direction: column;
   margin: 3% auto;
+  gap: 10px;
 }
 
-.session__item {
-  padding: 5%;
-  background-color: var(--secondaryColor);
-  border: none;
-  border-radius: 0.5rem;
-
-  box-shadow: 0 5px 30px 5px rgba(0,0,0,0.2);
-
-  display: flex;
-  justify-content: space-between;
-}
-
-.item__name {
-  width: 60%;
-  text-align: start;
-}
-
-.item__others {
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
-    gap: 1;
-}
 
 @media (min-width: 800px) {
     .session__items-box {

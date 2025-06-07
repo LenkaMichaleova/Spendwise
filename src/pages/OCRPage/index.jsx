@@ -32,6 +32,7 @@ export const OCRPage = () => {
     handleOCR()
   }, [image])
 
+  const temporaryItems = localStorage.getItem("temporary-items")
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -68,15 +69,18 @@ export const OCRPage = () => {
       const data = await response.json();
       const parsed = JSON.parse(data.choices[0].message.content);
       setItems(parsed.items || []);
+      console.log("response is", data.choices[0].message.content.items )
+      localStorage.setItem(("temporary-items",JSON.stringify(data.choices[0].message.content.items)))
     } catch (err) {
       setError('This image is not readable');
       console.error(err);
     }
   };
 
+  console.log(temporaryItems)
   return (
     <div className='ocr-page'>
-      <BackButton path="/HomePage"/>
+      <BackButton path="/Session"/>
   
       {items.length === 0 ?
       <div className='ocr-upload'>
@@ -112,7 +116,7 @@ export const OCRPage = () => {
 
       :
         <div className='ocr__items-box'>
-          {items.map((item, index) =>
+          {temporaryItems.map((item, index) =>
             <OCRItem 
               key={`${item.name}-${index}`} 
               name={item.name} 

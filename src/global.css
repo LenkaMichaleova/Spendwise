@@ -26,6 +26,10 @@ body {
   min-height: 100%;
 }
 
+h1 {
+  font-size: 1rem; 
+}
+
 .app {
   display: flex;
   flex-direction: column;

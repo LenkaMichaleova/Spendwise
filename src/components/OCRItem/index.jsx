@@ -5,7 +5,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' }  };
 
 export const OCRItem = ( {name, price, description} ) => {
   return(
-    <button className='ocr__item'>
+    <label className='ocr__item'>
       <div className='ocr__item--prvni-radek'> 
         <span className='ocr__item__name'>{name}</span>
         <span className='ocr__item__others'>
@@ -18,6 +18,6 @@ export const OCRItem = ( {name, price, description} ) => {
       <div className='ocr__item__description'>
         {description}
       </div>
-    </button>
+    </label>
   )
 }
