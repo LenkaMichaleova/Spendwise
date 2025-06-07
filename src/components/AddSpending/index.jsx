@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const AddSpending = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,11 +27,11 @@ export const AddSpending = () => {
       {isOpen && (
         <div className="add-spending-content">
           <form onSubmit={handleSubmit}>
-            <h3>Add spending</h3>
-            <div className="close-btn">
-              <Button onClick={() => setIsOpen(false)} variant="outlined">
-                X
-              </Button>
+            <div className="form-header">
+              <h3>Add spending</h3>
+              <div className="close-btn">
+                <CloseIcon onClick={() => setIsOpen(false)} />
+              </div>
             </div>
 
             <div className="inputs">
@@ -67,15 +68,10 @@ export const AddSpending = () => {
                 variant="outlined"
               />
 
-              <FormControl
-                className="input"
-                sx={{ m: 1, minWidth: 120 }}
-                size="small"
-              >
-                <InputLabel id="demo-select-small-label">Tag</InputLabel>
+              <FormControl className="input">
+                <InputLabel>Tag</InputLabel>
                 <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-small"
+                  style={{ height: 35 }}
                   value={tag}
                   label="Tag"
                   onChange={(e) => setTag(e.target.value)}
@@ -92,11 +88,11 @@ export const AddSpending = () => {
                   <MenuItem value="Other">Other</MenuItem>
                 </Select>
               </FormControl>
-            </div>
 
-            <Button className="save-btn" type="submit" variant="contained">
-              Save
-            </Button>
+              <Button className="save-btn" type="submit" variant="contained">
+                Save
+              </Button>
+            </div>
           </form>
         </div>
       )}
