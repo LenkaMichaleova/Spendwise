@@ -1,0 +1,37 @@
+.ocr__item {
+  width: 90vw;
+  padding: 2% 4%;
+  background-color: var(--secondaryColor);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 30px 5px rgba(0,0,0,0.2);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.ocr__item--prvni-radek {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ocr__item__name {
+  width: 70%;
+  text-align: start;
+}
+
+.ocr__item__others {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1;
+}
+
+.ocr__item__description {
+    text-align: left;
+    font-size: smaller;
+    color: grey;
+    width: 85%;
+}

@@ -3,6 +3,7 @@ import Tesseract from 'tesseract.js';
 import './style.css';
 import { Camera, Upload } from 'lucide-react'
 import { BackButton } from '../../components/BackButton';
+import { OCRItem } from '../../components/OCRItem';
 
 export const OCRPage = () => {
   const [image, setImage] = useState(null);
@@ -76,7 +77,8 @@ export const OCRPage = () => {
   return (
     <div className='ocr-page'>
       <BackButton path="/HomePage"/>
-
+  
+      {items.length === 0 ?
       <div className='ocr-upload'>
         <label htmlFor="uploadCamera" className='ocr-upload__btn mobile-mode'>
           <Camera color="var(--primaryColor)" size={30}/>
@@ -102,12 +104,24 @@ export const OCRPage = () => {
           accept="image/*" 
           onChange={handleImageChange}
         />
-      
-      {image && <img className='obrazek' src={image}/>}
-      {loading && 'Zpracovávám...'}
-      {error && <p>{error}</p>}
-
+        
+        {image && <img className='obrazek' src={image}/>}
+        {loading && 'Zpracovávám...'}
+        {error && <p>{error}</p>}
       </div>
+
+      :
+        <div className='ocr__items-box'>
+          {items.map((item, index) =>
+            <OCRItem 
+              key={`${item.name}-${index}`} 
+              name={item.name} 
+              price={item.price} 
+              description={item.description}
+            />
+          )}
+        </div>
+    }
     </div>
   );
 };

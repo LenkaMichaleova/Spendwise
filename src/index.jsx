@@ -12,6 +12,7 @@ import { NavMobile } from './components/NavMobile';
 import { NavPC } from './components/NavPC';
 import { Footer } from './components/Footer';
 import { StatsPage } from './pages/StatsPage';
+import { SessionPage } from './pages/SessionPage';
 
 const App = () => {
   return (
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: '/HomePage',
         element: <HomePage />,
+      },
+      {
+        path: '/Session',
+        element: <SessionPage />,
       },
       {
         path: '/Stats',
