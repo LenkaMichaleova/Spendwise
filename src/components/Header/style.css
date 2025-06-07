@@ -44,7 +44,7 @@
 @media (min-width: 1000px) {
   .app-header {
     background-color: var(--secondaryColor);
-    background-image: url("../../../public/bankovka2.png");
+    background-image: url("../../../public/bankovka2.webp");
     background-size: 5%;
     border-bottom: 1px solid silver;
     padding: 0.5rem;

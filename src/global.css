@@ -16,7 +16,7 @@ html {
 
 body {
   background-color: var(--backgroundColor);
-  background-image: url("../public/bankovka2.png");
+  background-image: url("../public/bankovka2.webp");
   background-size: 120%;
   background-position: top;
   background-repeat: no-repeat;
