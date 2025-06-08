@@ -38,17 +38,17 @@ export const SessionPage = () => {
     setItems(newItems);
   };
 
-  console.log();
-
   const totalPrice = items.reduce(
     (acc, polozka) => acc + polozka.price * polozka.count,
     0,
   );
 
-  // const limit = localStorage.getItem('limit');
-  // if (limit !== 0) {
-  //   setIsLimit(true);
-  // }
+  const limit = localStorage.getItem('limit');
+  useEffect(() => {
+    const localStorageItems = JSON.parse(localStorage.getItem('items'));
+    const matchingItem = localStorageItems.filter((id) => id === sessionId);
+    console.log(matchingItem);
+  }, [sessionId]);
 
   return (
     <div className="content">
