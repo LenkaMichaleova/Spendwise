@@ -93,13 +93,13 @@ export const ReusableModal = ({
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="Groceries">Groceries</MenuItem>
-                    <MenuItem value="Food&Drink">Eating Out</MenuItem>
-                    <MenuItem value="Entertainment">Entertainment</MenuItem>
-                    <MenuItem value="Transport&Travel">
+                    <MenuItem value="groceries">Groceries</MenuItem>
+                    <MenuItem value="eating-out">Eating Out</MenuItem>
+                    <MenuItem value="entertainment">Entertainment</MenuItem>
+                    <MenuItem value="transport-and-travel">
                       Transport & Travel
                     </MenuItem>
-                    <MenuItem value="Other">Other</MenuItem>
+                    <MenuItem value="other">Other</MenuItem>
                   </Select>
                 </FormControl>
               )}

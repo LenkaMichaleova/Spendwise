@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Backdrop from '@mui/material/Backdrop';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
@@ -11,6 +10,8 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  console.log("dial is open", open)
 
   const actions = [
     {
@@ -29,6 +30,7 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick }) => {
         icon={<SpeedDialIcon style={{ color: 'var(--primaryColor)' }} />}
         onClose={handleClose}
         onOpen={handleOpen}
+
         open={open}
         FabProps={{
           sx: {
@@ -45,7 +47,7 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick }) => {
             icon={action.icon}
             tooltipTitle={action.name}
             tooltipOpen
-            // onClick={handleClose}
+      
             onClick={action.onClick}
           />
         ))}

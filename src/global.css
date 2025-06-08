@@ -8,6 +8,12 @@
   --backgroundColor: #E3EFF7;
   --primaryColor: #002374;
   --secondaryColor: #f7f7f7;
+
+  --groceries: #87CEEB;
+  --transport-and-travel: #E6C87C;
+  --eating-out: #79CB9C;
+  --entertainment: #FF6961 ;
+  --other: #CCCCCC ;
 }
 
 html {

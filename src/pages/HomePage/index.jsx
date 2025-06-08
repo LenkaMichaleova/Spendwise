@@ -34,6 +34,7 @@ export const HomePage = () => {
         onSubmit={handleSubmit}
       />
       <SpeedDialTooltipOpen 
+      
         onSpendingClick={() => setIsModalOpen(true)} 
       />
     </div>
