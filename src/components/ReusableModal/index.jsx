@@ -17,7 +17,8 @@ export const ReusableModal = ({
     itemPrice, 
     itemTag, 
     sessionLimit, 
-    username 
+    username,
+    onSubmit
   }) => {
 
   const [name, setName] = useState('');
@@ -26,8 +27,18 @@ export const ReusableModal = ({
   const [limit, setLimit] = useState(null)
   const [userName, setUserName] = useState(localStorage.getItem("userName"))
 
-  const handleSubmit = () => {
-    userName && localStorage.setItem("userName", userName.trim()) 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    userName && localStorage.setItem("userName", userName.trim())
+
+    const objectToSend = { name, price, tag, limit }
+    onSubmit(objectToSend)
+    
+    setName("")
+    setPrice("")
+    setTag("")
+    setLimit("")
   }
 
   return (
@@ -92,7 +103,7 @@ export const ReusableModal = ({
               </FormControl>
               }
 
-              {limit &&
+              {sessionLimit &&
               <TextField
                 sx={{ '& .MuiInputBase-root': { height: '50px' } }}
                 className="input"
