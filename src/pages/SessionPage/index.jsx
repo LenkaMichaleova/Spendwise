@@ -8,6 +8,7 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { LimitDonut } from '../../components/LimitDonut';
+import { useParams } from 'react-router-dom';
 
 const polozky = [
   { id: 1, name: 'knedlo vepřo zelo', price: 250, count: 1 },
@@ -22,6 +23,9 @@ export const SessionPage = () => {
   const [isLimit, setIsLimit] = useState(false);
   const [sessionLimit, setSessionLimit] = useState(0);
   const navigate = useNavigate();
+  const { sessionId } = useParams();
+
+  console.log(sessionId);
 
   const setItemCount = (id, count) => {
     const newItems = items.map((item) => {
@@ -33,6 +37,8 @@ export const SessionPage = () => {
 
     setItems(newItems);
   };
+
+  console.log();
 
   const totalPrice = items.reduce(
     (acc, polozka) => acc + polozka.price * polozka.count,
