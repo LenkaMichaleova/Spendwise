@@ -18,7 +18,12 @@ export const Header = () => {
         </div>
         <div className="name">{localStorage.getItem('userName')}</div>
       </div>
-      <ReusableModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} username={true}/>
+      <ReusableModal
+        title="User name" 
+        isModalOpen={isModalOpen} 
+        setIsModalOpen={setIsModalOpen} 
+        username={true}
+      />
     </header>
   )
 };

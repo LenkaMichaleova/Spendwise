@@ -30,7 +30,7 @@ export const SessionPage = () => {
   }, [polozky]);
 
   return (
-    <div className="session">
+    <div className="content">
       <BackButton path="/HomePage" />
       <div className="session-header">
         <div className="session-edit">

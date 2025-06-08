@@ -57,7 +57,7 @@ export const OCRPage = () => {
           "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
         },
         body: JSON.stringify({
-          model: "gpt-4o-mini",
+          model: "gpt-4",
           messages: [
             { role: "system", content: "Jsi pomocník pro strukturování textu." },
             { role: "user", content: prompt }
@@ -70,7 +70,7 @@ export const OCRPage = () => {
       const parsed = JSON.parse(data.choices[0].message.content);
       setItems(parsed.items || []);
       console.log("response is", data.choices[0].message.content.items )
-      localStorage.setItem(("temporary-items",JSON.stringify(data.choices[0].message.content.items)))
+      localStorage.setItem("temporary-items",JSON.stringify(data.choices[0].message.content.items))
     } catch (err) {
       setError('This image is not readable');
       console.error(err);
@@ -79,7 +79,7 @@ export const OCRPage = () => {
 
   console.log(temporaryItems)
   return (
-    <div className='ocr-page'>
+    <div className='content'>
       <BackButton path="/Session"/>
   
       {items.length === 0 ?
@@ -116,7 +116,7 @@ export const OCRPage = () => {
 
       :
         <div className='ocr__items-box'>
-          {temporaryItems.map((item, index) =>
+          {items.map((item, index) =>
             <OCRItem 
               key={`${item.name}-${index}`} 
               name={item.name} 

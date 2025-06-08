@@ -38,10 +38,15 @@ h1 {
 
 .app-main {
   display: flex;
-  flex: 1;
   position: relative;
   justify-content: center;
 }
+
+.content {
+  margin: 2% 5%;
+  width: 100%;
+}
+
 
 @media (min-width: 1000px) {
   body {
