@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { LimitDonut } from '../../components/LimitDonut';
 import { useParams } from 'react-router-dom';
+import { LimitModal } from '../../components/LimitModal';
 
 export const SessionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [session, setSession] = useState();
   const [items, setItems] = useState([]);
+  const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
   // const [total, setTotal] = useState(0);
 
   const navigate = useNavigate();
@@ -43,6 +45,7 @@ export const SessionPage = () => {
     setSession(matchingSession[0]);
   }, [sessionId]);
 
+  const sessionLimit = session?.sessionLimit;
   console.log('Sesion limit is', session?.sessionLimit);
 
   return (
@@ -93,15 +96,28 @@ export const SessionPage = () => {
       </div>
 
       <div className="limit-price-wrapper">
-        {session?.sessionLimit !== 0 && (
-          <div className="limit">
-            <span>Limit: {session?.sessionLimit}</span>
-          </div>
-        )}
+        <div className="limit">
+          <span>
+            Limit:
+            {session?.sessionLimit === 0
+              ? ' - '
+              : ` ${session?.sessionLimit} Kč`}
+          </span>
+          <LimitModal
+            isLimitModalOpen={isLimitModalOpen}
+            sessionLimit={sessionLimit}
+            setIsLimitModalOpen={setIsLimitModalOpen}
+          />
+          <button
+            onClick={() => {
+              setIsLimitModalOpen(!isLimitModalOpen);
+            }}
+          >
+            Edit Limit
+          </button>
+        </div>
 
-        {session?.sessionLimit !== 0 && (
-          <LimitDonut spent={400} free={100} />
-        )}
+        {session?.sessionLimit !== 0 && <LimitDonut spent={400} free={100} />}
         <div className="price-wrapper">
           <div className="total-price">
             <span>Total:</span>
