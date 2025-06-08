@@ -10,22 +10,14 @@ import { useState, useEffect } from 'react';
 import { LimitDonut } from '../../components/LimitDonut';
 import { useParams } from 'react-router-dom';
 
-const polozky = [
-  { id: 1, name: 'knedlo vepřo zelo', price: 250, count: 1 },
-  { id: 2, name: 'knedlo kuřo zelo', price: 248, count: 1 },
-  { id: 3, name: 'knedlo zelo (pro vegany)', price: 205, count: 1 },
-];
-
 export const SessionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [items, setItems] = useState(polozky);
+  const [session, setSession] = useState()
+  const [items, setItems] = useState([]);
   // const [total, setTotal] = useState(0);
-  const [isLimit, setIsLimit] = useState(false);
-  const [sessionLimit, setSessionLimit] = useState(0);
+
   const navigate = useNavigate();
   const { sessionId } = useParams();
-
-  console.log(sessionId);
 
   const setItemCount = (id, count) => {
     const newItems = items.map((item) => {
@@ -43,11 +35,10 @@ export const SessionPage = () => {
     0,
   );
 
-  const limit = localStorage.getItem('limit');
   useEffect(() => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
-    const matchingItem = localStorageItems.filter((id) => id === sessionId);
-    console.log(matchingItem);
+    const matchingSession = localStorageItems.filter((item) => item.id === sessionId);
+    setSession(matchingSession[0])
   }, [sessionId]);
 
   return (
@@ -98,11 +89,11 @@ export const SessionPage = () => {
       </div>
 
       <div className="limit-price-wrapper">
-        {isLimit && (
+      
           <div className="limit">
-            <span>Limit: {limit}</span>
+            <span>Limit: {session?.sessionLimit}</span>
           </div>
-        )}
+     
 
         <LimitDonut spent={400} free={100} />
         <div className="price-wrapper">
