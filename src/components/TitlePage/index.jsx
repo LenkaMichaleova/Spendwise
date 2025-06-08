@@ -4,76 +4,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './style.css';
 
-// export const TitlePage = ({ user }) => {
-//   const [name, setName] = useState(localStorage.getItem('userName') || '');
-//   const [error, setError] = useState(false);
-//   const [showContent1, setShowContent1] = useState(true);
-//   const [showContent2, setShowContent2] = useState(true);
-
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       setShowContent1(false);
-//     }, 5000);
-
-//     return () => clearTimeout(timer);
-//   }, []);
-
-//   const navigate = useNavigate();
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (name.trim()) {
-//       localStorage.setItem('userName', name.trim());
-//       setShowContent2(false);
-//       navigate('/');
-//     } else {
-//       setError(true);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       {user ? (
-//         <>
-//           {showContent1 && (
-//             <>
-//               <div className="title-page">
-//                 <div className="title-page__header">
-//                   <h1>Welcome back, {`${user}!`}</h1>
-//                   <p>Track your spending</p>
-//                   <p>Pay what's fair</p>
-//                 </div>
-//               </div>
-//               <p>Loading ...</p>
-//             </>
-//           )}
-//         </>
-//       ) : (
-//         <>
-//           {showContent2 && (
-//             <form onSubmit={handleSubmit}>
-//               <div className="title-page__name">
-//                 <label>Set username</label>
-//                 <input
-//                   type="text"
-//                   value={name}
-//                   onChange={(e) => setName(e.target.value)}
-//                 />
-//                 <p className="error-text">
-//                   {error && 'Please set your username'}
-//                 </p>
-//               </div>
-//               <button type="submit" className="title-page__button">
-//                 Start Spending
-//               </button>
-//             </form>
-//           )}
-//         </>
-//       )}
-//     </div>
-//   );
-// };
-
 export const TitlePage = () => {
   const [name, setName] = useState(localStorage.getItem('userName') || '');
   const [error, setError] = useState(false);
@@ -81,10 +11,13 @@ export const TitlePage = () => {
 
   const userName = localStorage.getItem('userName');
 
-  const [isUser, setIsUser] = useState(false);
-
-  // localStorage.clear();
-  // localStorage.removeItem();
+  useEffect(() => {
+    if (name) {
+      setTimeout(() => {
+        navigate('/HomePage');
+      }, 3000);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -112,8 +45,8 @@ export const TitlePage = () => {
           <div className="welcome">
             Welcome {userName && ` back, ${userName}!`}
           </div>
-          <div>Track your spending</div>
-          <div>Pay what's fair</div>
+          <div>Track your spending.</div>
+          <div>Pay what's fair.</div>
         </div>
       </div>
 
@@ -129,11 +62,7 @@ export const TitlePage = () => {
               label="Set username"
               variant="outlined"
             />
-            {/* <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            /> */}
+
             <p className="error-text">{error && 'Please set your username'}</p>
           </div>
           <Button
@@ -144,21 +73,9 @@ export const TitlePage = () => {
           >
             Start Spending
           </Button>
-          {/* <button type="submit" className="title-page__button">
-            Start Spending
-          </button> */}
         </form>
       ) : (
-        <Link to="/HomePage" className="title-page__button">
-          <Button
-            className="save-btn"
-            type="submit"
-            variant="contained"
-            style={{ backgroundColor: 'var(--primaryColor)' }}
-          >
-            Start Spending
-          </Button>
-        </Link>
+        <div className="loading">Loading ...</div>
       )}
     </div>
   );
