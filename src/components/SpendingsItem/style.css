@@ -15,7 +15,7 @@
 
 .spending-item:hover {
     transform: scale(1.01);
-    cursor: zoom-in;
+    cursor: pointer;
 }
 
 .spending-item__name {

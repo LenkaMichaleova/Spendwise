@@ -22,14 +22,14 @@
 }
 
 .session__item__others {
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1;
 }
 
 .item__icon:hover {
-    transform: scale(1.1);
-    cursor: pointer;
+  transform: scale(1.1);
+  cursor: pointer;
 }

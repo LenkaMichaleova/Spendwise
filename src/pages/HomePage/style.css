@@ -1,3 +1,12 @@
 .spendings {
-  width: 90vw;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 800px) {
+  .spendings {
+    width: 40%;
+  }
 }

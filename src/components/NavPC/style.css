@@ -11,10 +11,9 @@
 
 @media (min-width: 800px) {
   .navigace__PC-mode {
-    width: 170px;
+    width: 200px;
     display: flex;
     flex-direction: column;
-    flex: 1;
     gap: 3rem;
     background-color: var(--primaryColor);
     height: 100vh;

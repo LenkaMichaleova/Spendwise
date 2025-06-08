@@ -11,8 +11,6 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick, onSessionClick }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log("dial is open", open)
-
   const actions = [
     {
       icon: <AddCardOutlinedIcon />,
@@ -26,7 +24,16 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick, onSessionClick }) => {
   ];
 
   return (
-    <Box sx={{ position: 'fixed', bottom: 80, right: 16, zIndex: 99 }}>
+    <Box sx={{ 
+          position: 'fixed', 
+          bottom: 80, 
+          right: 16, 
+          zIndex: 99,     
+          // '@media (min-width:800px)': {
+          //   right: '35vw',
+          //   bottom: '50vh'
+          // }, 
+        }}>
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
