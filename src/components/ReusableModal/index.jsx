@@ -32,8 +32,8 @@ export const ReusableModal = ({
 
   return (
     <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-      <div className="add-spending-modal">
-        <div className="add-spending-content">
+      <div className="reusable-modal">
+        <div className="reusable-modal__content">
           <form onSubmit={handleSubmit}>
             <div className="form-header">
               <h3>{title}</h3>
