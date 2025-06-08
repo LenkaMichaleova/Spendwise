@@ -12,8 +12,8 @@
 }
 
 .session__item:hover {
-    transform: scale(1.01);
-    cursor: zoom-in;
+  transform: scale(1.01);
+  cursor: zoom-in;
 }
 
 .session__item__name {

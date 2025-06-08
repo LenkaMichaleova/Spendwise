@@ -9,7 +9,7 @@ export const LimitDonut = ({ spent, free }) => {
   const COLORS = ['#123150', '#E6DFD4'];
 
   return (
-    <PieChart width={300} height={100}>
+    <PieChart width={100} height={100}>
       <Pie
         data={data01}
         s
