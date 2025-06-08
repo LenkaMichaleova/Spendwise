@@ -31,7 +31,7 @@ export const ReusableModal = ({
 
     userName && localStorage.setItem('userName', userName.trim());
 
-    const objectToSend = { name, price, tag, limit, id: crypto.randomUUID() };
+    const objectToSend = { name, price, tag, limit, id: crypto.randomUUID(), count: 1 };
     onSubmit(objectToSend);
 
     setName('');

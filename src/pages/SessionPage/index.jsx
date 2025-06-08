@@ -36,12 +36,7 @@ export const SessionPage = () => {
   );
 
   const localStorageItems = JSON.parse(localStorage.getItem("items")) ?? []
-
-  console.log(localStorageItems)
-
   const sessionItems = localStorageItems?.find((item) => item.id === sessionId)?.items ?? []
-
-  console.log("session items", sessionItems)
 
   const handleSubmit = (obj) => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
