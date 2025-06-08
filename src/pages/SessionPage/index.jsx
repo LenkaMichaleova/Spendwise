@@ -37,6 +37,32 @@ export const SessionPage = () => {
     0,
   );
 
+  const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
+
+  console.log(localStorageItems);
+
+  const sessionItems =
+    localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
+
+  console.log('session items', sessionItems);
+
+  const handleSubmit = (obj) => {
+    const localStorageItems = JSON.parse(localStorage.getItem('items'));
+    const matchingSession = localStorageItems.filter(
+      (item) => item.id === sessionId,
+    )?.[0];
+
+    const currentItems = matchingSession.items ?? [];
+    matchingSession.items = [...currentItems, obj];
+    console.log('match', matchingSession);
+
+    Object.assign(
+      localStorageItems.find((item) => item.id === sessionId),
+      matchingSession,
+    );
+    localStorage.setItem('items', JSON.stringify(localStorageItems));
+  };
+
   useEffect(() => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter(
@@ -59,7 +85,7 @@ export const SessionPage = () => {
         <div
           role="button"
           className="session-menu"
-          onClick={() => navigate('/Menu')}
+          onClick={() => navigate(`/Menu/${sessionId}`)}
         >
           <CameraAltOutlinedIcon />
           <span>Menu</span>
@@ -79,10 +105,11 @@ export const SessionPage = () => {
         itemPrice={true}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        onSubmit={handleSubmit}
       />
 
       <div className="session__items-box">
-        {items.map((item, index) => (
+        {sessionItems?.map((item, index) => (
           <SessionItem
             count={item.count}
             setItemCount={setItemCount}

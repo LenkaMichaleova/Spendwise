@@ -9,26 +9,17 @@ import { NewSessionModal } from '../../components/NewSessionModal';
 export const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSessionModalOpen, setIsSessionModalOpen] = useState(false)
-  const [items, setItems] = useState([])
   const navigate = useNavigate()
 
-  // const seznam = [ 
-  //   //spending
-  //   {name: "jméno", id:1, tag:"groceries", price: 0, icon:"ikon"},
-  //   //session
-  //   {name: "Název session", id:1, tag:"groceries", price: 0, limit:1000, icon:"ikon", polozky: [{name: "jméno", id:1, tag:"eating-out", price: 0, count:1, icon:"ikon"}] }
-  // ]
-
   const localStorageItems = JSON.parse(localStorage.getItem("items")) ?? []
-  const finalList = localStorageItems.concat(items)
 
-  const handleSubmit = (formItems) => {
-    setItems(prevItems => [...prevItems, formItems])
+  const handleSpendingSubmit = (formItems) => {
+    const currentLocalStorage = JSON.parse(localStorage.getItem("items")) ?? []
+    localStorage.setItem("items", JSON.stringify([...currentLocalStorage, formItems]))
   }
 
   const handleSessionSubmit = (obj) => {
     const currentLocalStorage = JSON.parse(localStorage.getItem("items")) ?? []
-
     localStorage.setItem("items", JSON.stringify([...currentLocalStorage, obj]))
 
     navigate(`/Session/${obj.id}`)
@@ -39,7 +30,7 @@ export const HomePage = () => {
       <h1>Spendings</h1>
 
       <div className='spendings'>
-        {finalList.map(item => 
+        {localStorageItems.map(item => 
           <SpendingItem 
             key={item.id} 
             name={item.name || item.sessionName} 
@@ -58,7 +49,7 @@ export const HomePage = () => {
         itemName={true}
         itemPrice={true}
         itemTag={true}
-        onSubmit={handleSubmit}
+        onSubmit={handleSpendingSubmit}
       />
 
       <NewSessionModal 
