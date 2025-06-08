@@ -1,5 +1,7 @@
 import { Tag } from 'lucide-react';
 import './style.css';
+import AddCardOutlinedIcon from '@mui/icons-material/AddCardOutlined';
+import NightlifeOutlinedIcon from '@mui/icons-material/NightlifeOutlined';
 
 export const SpendingItem = ( {name, tag, price, icon} ) => {
 
