@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { LimitDonut } from '../../components/LimitDonut';
 import { useParams } from 'react-router-dom';
+import { LimitModal } from '../../components/LimitModal';
 
 export const SessionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [session, setSession] = useState();
   const [items, setItems] = useState([]);
+  const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
   // const [total, setTotal] = useState(0);
 
   const navigate = useNavigate();
@@ -44,13 +46,16 @@ export const SessionPage = () => {
       (item) => item.id === sessionId,
     )?.[0];
 
-    const currentItems = matchingSession.items ?? []
-    matchingSession.items = [...currentItems, obj]
-    console.log("match", matchingSession)
+    const currentItems = matchingSession.items ?? [];
+    matchingSession.items = [...currentItems, obj];
+    console.log('match', matchingSession);
 
-    Object.assign(localStorageItems.find(item=> item.id === sessionId ), matchingSession)
-    localStorage.setItem("items", JSON.stringify(localStorageItems))
-  }
+    Object.assign(
+      localStorageItems.find((item) => item.id === sessionId),
+      matchingSession,
+    );
+    localStorage.setItem('items', JSON.stringify(localStorageItems));
+  };
 
   useEffect(() => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
@@ -59,6 +64,9 @@ export const SessionPage = () => {
     );
     setSession(matchingSession[0]);
   }, [sessionId]);
+
+  const sessionLimit = session?.sessionLimit;
+  console.log('Sesion limit is', session?.sessionLimit);
 
   return (
     <div className="content">
@@ -109,15 +117,30 @@ export const SessionPage = () => {
       </div>
 
       <div className="limit-price-wrapper">
-        {session?.sessionLimit !== 0 && (
-          <div className="limit">
-            <span>Limit: {session?.sessionLimit}</span>
-          </div>
-        )}
+        <div className="limit">
+          <span>
+            Limit:
+            {session?.sessionLimit === 0
+              ? ' - '
+              : ` ${session?.sessionLimit} Kč`}
+          </span>
+          <LimitModal
+            isLimitModalOpen={isLimitModalOpen}
+            sessionLimit={sessionLimit}
+            setIsLimitModalOpen={setIsLimitModalOpen}
+            sessionId={sessionId}
+            setSession={setSession}
+          />
+          <button
+            onClick={() => {
+              setIsLimitModalOpen(!isLimitModalOpen);
+            }}
+          >
+            Edit Limit
+          </button>
+        </div>
 
-        {session?.sessionLimit !== 0 && (
-          <LimitDonut spent={400} free={100} />
-        )}
+        {session?.sessionLimit !== 0 && <LimitDonut spent={400} free={100} />}
         <div className="price-wrapper">
           <div className="total-price">
             <span>Total:</span>
