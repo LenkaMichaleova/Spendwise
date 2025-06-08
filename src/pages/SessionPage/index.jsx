@@ -93,13 +93,13 @@ export const SessionPage = () => {
       </div>
 
       <div className="limit-price-wrapper">
-        {session?.sessionLimit && (
+        {session?.sessionLimit !== 0 && (
           <div className="limit">
             <span>Limit: {session?.sessionLimit}</span>
           </div>
         )}
 
-        {session?.sessionLimit !== String(0) && (
+        {session?.sessionLimit !== 0 && (
           <LimitDonut spent={400} free={100} />
         )}
         <div className="price-wrapper">

@@ -19,7 +19,7 @@ export const NewSessionModal = ({
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const objectToSend = { sessionName, price: 0, tag: "eating-out", sessionLimit, id:crypto.randomUUID()}
+    const objectToSend = { sessionName, price: 0, tag: "eating-out", sessionLimit: Number(sessionLimit), id:crypto.randomUUID()}
     onSubmit(objectToSend)
 
     setIsModalOpen(false)
