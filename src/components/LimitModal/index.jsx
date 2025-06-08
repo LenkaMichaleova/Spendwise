@@ -8,12 +8,29 @@ export const LimitModal = ({
   isLimitModalOpen,
   setIsLimitModalOpen,
   sessionLimit,
+  sessionId,
+  setSession,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newLimitValue = e.target.limit.value;
+    const newLimitValue = Number(e.target.limit.value);
     setIsLimitModalOpen(false);
     console.log(newLimitValue);
+
+    const localStorageItems = JSON.parse(localStorage.getItem('items'));
+    const matchingSession = localStorageItems.filter(
+      (item) => item.id === sessionId,
+    )?.[0];
+
+    matchingSession.sessionLimit = newLimitValue;
+
+    Object.assign(
+      localStorageItems.find((item) => item.id === sessionId),
+      matchingSession,
+    );
+
+    localStorage.setItem('items', JSON.stringify(localStorageItems));
+    setSession((old) => ({ ...old, sessionLimit: newLimitValue }));
   };
 
   return (

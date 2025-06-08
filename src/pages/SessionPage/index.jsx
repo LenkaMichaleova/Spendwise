@@ -134,6 +134,8 @@ export const SessionPage = () => {
             isLimitModalOpen={isLimitModalOpen}
             sessionLimit={sessionLimit}
             setIsLimitModalOpen={setIsLimitModalOpen}
+            sessionId={sessionId}
+            setSession={setSession}
           />
           <button
             onClick={() => {
