@@ -44,8 +44,7 @@ h1 {
 
 .app-main {
   display: flex;
-  flex: 1;
-  position: relative;
+  /* position: relative; */
   justify-content: center;
 }
 

@@ -134,32 +134,38 @@ export const SessionPage = () => {
 
       <div className="limit-price-wrapper">
         <div className="limit">
-          <span>
-            Limit:
-            {session?.sessionLimit === 0
-              ? ' - '
-              : ` ${session?.sessionLimit} Kč`}
+          <span className='limit-header'>Your limit:</span>
+          <span className='limit-edit'>
+            <span><strong>
+              {session?.sessionLimit === 0
+                ? ' - '
+                : `${session?.sessionLimit} Kč`}
+            
+            </strong></span>
+            <span>
+              <LimitModal
+                isLimitModalOpen={isLimitModalOpen}
+                sessionLimit={sessionLimit}
+                setIsLimitModalOpen={setIsLimitModalOpen}
+                sessionId={sessionId}
+                setSession={setSession}
+              />
+              <EditOutlinedIcon
+                onClick={() => {
+                  setIsLimitModalOpen(!isLimitModalOpen);
+                }}
+              />
+            </span>
           </span>
-          <LimitModal
-            isLimitModalOpen={isLimitModalOpen}
-            sessionLimit={sessionLimit}
-            setIsLimitModalOpen={setIsLimitModalOpen}
-            sessionId={sessionId}
-            setSession={setSession}
-          />
-          <EditOutlinedIcon
-            onClick={() => {
-              setIsLimitModalOpen(!isLimitModalOpen);
-            }}
-          />
+        </div>
+        
+        <div className="limit-donut">
+        {session?.sessionLimit !== 0 && <LimitDonut spent={400} free={100} />}
         </div>
 
-        {session?.sessionLimit !== 0 && <LimitDonut spent={400} free={100} />}
         <div className="price-wrapper">
-          <div className="total-price">
-            <span>Total:</span>
-            {totalPrice} Kč
-          </div>
+          <div>Total:</div>
+          <div><strong>{totalPrice}</strong> Kč</div>
         </div>
       </div>
     </div>
