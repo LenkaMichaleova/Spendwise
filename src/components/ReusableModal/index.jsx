@@ -9,18 +9,17 @@ import './style.css';
 import { useState } from 'react';
 import { ReusableBtn } from '../ReusableBtn';
 
-export const ReusableModal = ({ 
-    title, 
-    isModalOpen, 
-    setIsModalOpen, 
-    itemName, 
-    itemPrice, 
-    itemTag, 
-    sessionLimit, 
-    username,
-    onSubmit
-  }) => {
-
+export const ReusableModal = ({
+  title,
+  isModalOpen,
+  setIsModalOpen,
+  itemName,
+  itemPrice,
+  itemTag,
+  sessionLimit,
+  username,
+  onSubmit,
+}) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [tag, setTag] = useState('');
@@ -28,28 +27,32 @@ export const ReusableModal = ({
   const [userName, setUserName] = useState(localStorage.getItem('userName'));
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    userName && localStorage.setItem("userName", userName.trim())
+    userName && localStorage.setItem('userName', userName.trim());
 
-    const objectToSend = { name, price, tag, limit, id:crypto.randomUUID()}
-    onSubmit(objectToSend)
-    
-    setName("")
-    setPrice("")
-    setTag("")
-    setLimit("")
+    const objectToSend = { name, price, tag, limit, id: crypto.randomUUID() };
+    onSubmit(objectToSend);
 
-    setIsModalOpen(false)
-  }
+    setName('');
+    setPrice('');
+    setTag('');
+    setLimit('');
 
-  const isDisabled = 
-    (username && !!userName) || 
-    (itemTag && (!!name && !!price && !!tag)) || 
-    (!itemTag && (!!name && !!price))
+    setIsModalOpen(false);
+  };
+
+  const isDisabled =
+    (username && !!userName) ||
+    (itemTag && !!name && !!price && !!tag) ||
+    (!itemTag && !!name && !!price);
 
   return (
-    <Dialog disableRestoreFocus open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+    <Dialog
+      disableRestoreFocus
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    >
       <div className="reusable-modal">
         <div className="reusable-modal__content">
           <form onSubmit={handleSubmit}>
@@ -109,18 +112,18 @@ export const ReusableModal = ({
                 </FormControl>
               )}
 
-              {sessionLimit &&
-              <TextField
-                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
-                className="input"
-                onChange={(e) => setLimit(e.target.value)}
-                type="number"
-                value={limit}
-                id="outlined-basic"
-                label="Limit"
-                variant="outlined"
-              />
-              }
+              {sessionLimit && (
+                <TextField
+                  sx={{ '& .MuiInputBase-root': { height: '50px' } }}
+                  className="input"
+                  onChange={(e) => setLimit(e.target.value)}
+                  type="number"
+                  value={limit}
+                  id="outlined-basic"
+                  label="Limit"
+                  variant="outlined"
+                />
+              )}
 
               {username && (
                 <TextField
@@ -135,12 +138,7 @@ export const ReusableModal = ({
                 />
               )}
 
-              <ReusableBtn 
-                title="Save" 
-                type="submit"
-                disabled={!isDisabled}
-
-              />
+              <ReusableBtn title="Save" type="submit" disabled={!isDisabled} />
             </div>
           </form>
         </div>

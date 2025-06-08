@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom';
 
 export const SessionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [session, setSession] = useState()
+  const [session, setSession] = useState();
   const [items, setItems] = useState([]);
   // const [total, setTotal] = useState(0);
 
@@ -37,9 +37,13 @@ export const SessionPage = () => {
 
   useEffect(() => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
-    const matchingSession = localStorageItems.filter((item) => item.id === sessionId);
-    setSession(matchingSession[0])
+    const matchingSession = localStorageItems.filter(
+      (item) => item.id === sessionId,
+    );
+    setSession(matchingSession[0]);
   }, [sessionId]);
+
+  console.log('Sesion limit is', session?.sessionLimit);
 
   return (
     <div className="content">
@@ -89,13 +93,15 @@ export const SessionPage = () => {
       </div>
 
       <div className="limit-price-wrapper">
-      
+        {session?.sessionLimit && (
           <div className="limit">
             <span>Limit: {session?.sessionLimit}</span>
           </div>
-     
+        )}
 
-        <LimitDonut spent={400} free={100} />
+        {session?.sessionLimit !== String(0) && (
+          <LimitDonut spent={400} free={100} />
+        )}
         <div className="price-wrapper">
           <div className="total-price">
             <span>Total:</span>
