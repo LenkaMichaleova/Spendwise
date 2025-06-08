@@ -18,8 +18,8 @@ const polozky = [
 export const SessionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [items, setItems] = useState(polozky);
-  const [total, setTotal] = useState(0);
-  const [isLimit, setIsLimit] = useState(true);
+  // const [total, setTotal] = useState(0);
+  const [isLimit, setIsLimit] = useState(false);
   const [sessionLimit, setSessionLimit] = useState(0);
   const navigate = useNavigate();
 
@@ -34,16 +34,15 @@ export const SessionPage = () => {
     setItems(newItems);
   };
 
-  // let totalPrice = 0;
-  // polozky.forEach((polozka) => {
-  //   totalPrice += polozka.price * polozka.count;
-  // });
-  // setTotal(totalPrice);
-
   const totalPrice = items.reduce(
     (acc, polozka) => acc + polozka.price * polozka.count,
     0,
   );
+
+  // const limit = localStorage.getItem('limit');
+  // if (limit !== 0) {
+  //   setIsLimit(true);
+  // }
 
   return (
     <div className="content">
@@ -95,8 +94,7 @@ export const SessionPage = () => {
       <div className="limit-price-wrapper">
         {isLimit && (
           <div className="limit">
-            <span>Limit:</span>
-            <ReusableModal sessionLimit={sessionLimit} />
+            <span>Limit: {limit}</span>
           </div>
         )}
 
