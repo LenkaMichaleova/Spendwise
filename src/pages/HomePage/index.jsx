@@ -46,6 +46,7 @@ export const HomePage = () => {
             price={item.price} 
             tag={item.tag} 
             icon={item.name ? "spendings" : "session"}
+            id={item.id}
           />
         )}
       </div>
