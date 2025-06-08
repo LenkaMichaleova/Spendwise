@@ -1,0 +1,128 @@
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import CloseIcon from '@mui/icons-material/Close';
+import Dialog from '@mui/material/Dialog';
+import './style.css';
+import { useState } from 'react';
+import { ReusableBtn } from '../ReusableBtn';
+
+export const ReusableModal = ({ 
+    title, 
+    isModalOpen, 
+    setIsModalOpen, 
+    itemName, 
+    itemPrice, 
+    itemTag, 
+    sessionLimit, 
+    username 
+  }) => {
+
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [tag, setTag] = useState('');
+  const [limit, setLimit] = useState(null)
+  const [userName, setUserName] = useState(localStorage.getItem("userName"))
+
+  const handleSubmit = () => {
+    userName && localStorage.setItem("userName", userName.trim()) 
+  }
+
+  return (
+    <Dialog open={isModalOpen}>
+      <div className="add-spending-modal">
+        <div className="add-spending-content">
+          <form onSubmit={handleSubmit}>
+            <div className="form-header">
+              <h3>{title}</h3>
+              <div className="close-btn">
+                <CloseIcon onClick={() => setIsModalOpen(false)} />
+              </div>
+            </div>
+
+            <div className="inputs">
+                
+              {itemName && 
+              <TextField
+                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
+                className="input"
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                value={name}
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+              />
+              }
+
+              {itemPrice &&
+              <TextField
+                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
+                className="input"
+                onChange={(e) => setPrice(e.target.value)}
+                type="number"
+                label="Price"
+                value={price}
+                variant="outlined"
+              />
+              }
+
+              {itemTag &&
+              <FormControl className="input">
+                <InputLabel>Tag</InputLabel>
+                <Select
+                  style={{ height: 50 }}
+                  value={tag}
+                  label="Tag"
+                  onChange={(e) => setTag(e.target.value)}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="Groceries">Groceries</MenuItem>
+                  <MenuItem value="Food&Drink">Eating Out</MenuItem>
+                  <MenuItem value="Entertainment">Entertainment</MenuItem>
+                  <MenuItem value="Transport&Travel">
+                    Transport & Travel
+                  </MenuItem>
+                  <MenuItem value="Other">Other</MenuItem>
+                </Select>
+              </FormControl>
+              }
+
+              {limit &&
+              <TextField
+                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
+                className="input"
+                onChange={(e) => setLimit(e.target.value)}
+                type="text"
+                value={limit}
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+              />
+              }
+
+              {username && 
+              <TextField
+                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
+                className="input"
+                onChange={(e) => setUserName(e.target.value)}
+                type="text"
+                value={userName}
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+              />
+              }
+
+              <ReusableBtn title="Save" type="submit"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </Dialog>
+  );
+};

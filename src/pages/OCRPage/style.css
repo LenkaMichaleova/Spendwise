@@ -28,6 +28,11 @@
   align-items: center;
 }
 
+.ocr-upload__btn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 .obrazek {
     max-width: 100px;
     height: auto;
@@ -45,7 +50,12 @@
   display: none;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
+  .ocr-page {
+    width: 80%;
+    padding-right: 10%;
+  }
+
   .ocr-upload__btn {
     justify-content: center;
     width: 40vw;
@@ -56,5 +66,9 @@
   .ocr__items-box {
     width: 40vw;
     margin: 0;
+  }
+
+  .mobile-mode {
+    display: none;
   }
 }

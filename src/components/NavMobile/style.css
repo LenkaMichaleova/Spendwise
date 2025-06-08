@@ -15,7 +15,7 @@
   background-color: var(--secondaryColor);
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
   .navigation {
     display: none;
   }

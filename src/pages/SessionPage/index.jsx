@@ -1,12 +1,12 @@
-import { BackButton } from '../../components/BackButton';
-import { SessionItem } from '../../components/SessionItem';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
+import { BackButton } from '../../components/BackButton';
+import { SessionItem } from '../../components/SessionItem';
+import { ReusableBtn } from '../../components/ReusableBtn';
+import { ReusableModal } from '../../components/ReusableModal';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { ReusableBtn } from '../../components/ReusableBtn';
-import { AddSpending } from '../../components/AddSpending';
 
 const polozky = [
   {id: 1, name: 'knedlo vepřo zelo', price: 250},
@@ -37,7 +37,13 @@ export const SessionPage = () => {
         <ReusableBtn title="Add Spending" onClick={() => setIsModalOpen(true)}/>
       </div>
 
-      <AddSpending isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+      <ReusableModal 
+        title="Add Item" 
+        itemName={true} 
+        itemPrice={true}  
+        isModalOpen={isModalOpen} 
+        setIsModalOpen={setIsModalOpen}
+      />
 
       <div className='session__items-box'>
         {items.map((item, index) => 

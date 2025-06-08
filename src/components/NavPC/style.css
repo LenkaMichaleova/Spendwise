@@ -4,6 +4,11 @@
   display: none;
 }
 
+.ikon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 @media (min-width: 800px) {
   .navigace__PC-mode {
     display: flex;

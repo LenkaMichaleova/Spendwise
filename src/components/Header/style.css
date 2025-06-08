@@ -22,8 +22,14 @@
   font-size: 0.6rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   top: 2%;
   right: 2%;
+}
+
+.app-header--right:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 .logo {
@@ -57,5 +63,7 @@
 
   .app-header--right {
     position: initial;
+    flex-direction: row-reverse;
+    gap: 1rem;
   }
 }

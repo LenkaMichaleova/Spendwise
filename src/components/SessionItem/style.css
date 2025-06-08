@@ -11,6 +11,11 @@
   align-items: center;
 }
 
+.session__item:hover {
+    transform: scale(1.01);
+    cursor: zoom-in;
+}
+
 .session__item__name {
   width: 60%;
   text-align: start;
@@ -22,4 +27,9 @@
     justify-content: space-between;
     align-items: center;
     gap: 1;
+}
+
+.item__icon:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }

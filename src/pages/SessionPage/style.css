@@ -21,6 +21,11 @@
   gap: 0.5rem;
 }
 
+.session-menu:hover, .session-edit:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .session__items-box {
   width: 90vw;
   display: flex;
@@ -31,8 +36,13 @@
 
 
 @media (min-width: 800px) {
-    .session__items-box {
-      width: 40vw;
-      margin: 0;
-    }
+  .session-header {
+    width: 40vw;
+    padding: 0 1%;
+  }
+
+  .session__items-box {
+    width: 40vw;
+    margin: 0;
+  }
 }
