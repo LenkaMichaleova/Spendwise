@@ -30,7 +30,8 @@
   gap: 10px;
 }
 
-.total-price {
+.total-price,
+.limit {
   padding: 3%;
   background-color: var(--secondaryColor);
   color: var(--primaryColor);

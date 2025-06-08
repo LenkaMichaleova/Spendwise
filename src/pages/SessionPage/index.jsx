@@ -19,6 +19,7 @@ export const SessionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [items, setItems] = useState(polozky);
   const [total, setTotal] = useState(0);
+  const [isLimit, setIsLimit] = useState(true);
   const [sessionLimit, setSessionLimit] = useState(0);
   const navigate = useNavigate();
 
@@ -43,7 +44,6 @@ export const SessionPage = () => {
     (acc, polozka) => acc + polozka.price * polozka.count,
     0,
   );
-  console.log(totalPrice, polozky);
 
   return (
     <div className="content">
@@ -93,6 +93,13 @@ export const SessionPage = () => {
       </div>
 
       <div className="limit-price-wrapper">
+        {isLimit && (
+          <div className="limit">
+            <span>Limit:</span>
+            <ReusableModal sessionLimit={sessionLimit} />
+          </div>
+        )}
+
         <LimitDonut spent={400} free={100} />
         <div className="price-wrapper">
           <div className="total-price">
