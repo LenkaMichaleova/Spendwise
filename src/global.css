@@ -12,8 +12,8 @@
   --groceries: #87CEEB;
   --transport-and-travel: #E6C87C;
   --eating-out: #79CB9C;
-  --entertainment: #FF6961 ;
-  --other: #CCCCCC ;
+  --entertainment: #FF6961;
+  --other: #CCCCCC;
 }
 
 html {
@@ -44,15 +44,10 @@ h1 {
 
 .app-main {
   display: flex;
+  flex: 1;
   position: relative;
   justify-content: center;
 }
-
-.content {
-  margin: 2% 5%;
-  width: 100%;
-}
-
 
 @media (min-width: 1000px) {
   body {
