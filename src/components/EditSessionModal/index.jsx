@@ -1,29 +1,29 @@
 import { useState } from 'react';
-import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import Dialog from '@mui/material/Dialog';
 
-export const LimitModal = ({
-  isLimitModalOpen,
-  setIsLimitModalOpen,
-  sessionLimit,
+export const EditSessionModal = ({
+  isEditSessionModalOpen,
+  setIsEditSessionModalOpen,
   sessionId,
   setSession,
+  sessionName,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newLimitValue = Number(e.target.limit.value);
-    setIsLimitModalOpen(false);
-    console.log(newLimitValue);
+    const newSessionName = e.target.sessionNameInput.value;
+    setIsEditSessionModalOpen(false);
+    console.log(newSessionName);
 
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter(
       (item) => item.id === sessionId,
     )?.[0];
 
-    matchingSession.sessionLimit = newLimitValue;
+    matchingSession.sessionName = newSessionName;
 
     Object.assign(
       localStorageItems.find((item) => item.id === sessionId),
@@ -31,28 +31,28 @@ export const LimitModal = ({
     );
 
     localStorage.setItem('items', JSON.stringify(localStorageItems));
-    setSession((old) => ({ ...old, sessionLimit: newLimitValue }));
+    setSession((old) => ({ ...old, sessionName: newSessionName }));
   };
 
   return (
     <>
-      <Dialog disableRestoreFocus open={isLimitModalOpen}>
+      <Dialog disableRestoreFocus open={isEditSessionModalOpen}>
         <form onSubmit={handleSubmit}>
           <div className="form-header">
-            <h3>Edit limit</h3>
+            <h3>Edit session name</h3>
             <div className="close-btn">
-              <CloseIcon onClick={() => setIsLimitModalOpen(false)} />
+              <CloseIcon onClick={() => setIsEditSessionModalOpen(false)} />
             </div>
           </div>
 
           <TextField
             sx={{ '& .MuiInputBase-root': { height: '50px' } }}
             className="input"
-            name="limit"
-            type="number"
-            label="Limit"
+            name="sessionNameInput"
+            type="text"
+            label="Name"
             variant="outlined"
-            defaultValue={sessionLimit}
+            defaultValue={sessionName}
           />
 
           <Button

@@ -10,12 +10,14 @@ import { useState, useEffect } from 'react';
 import { LimitDonut } from '../../components/LimitDonut';
 import { useParams } from 'react-router-dom';
 import { LimitModal } from '../../components/LimitModal';
+import { EditSessionModal } from '../../components/EditSessionModal';
 
 export const SessionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [session, setSession] = useState();
   const [items, setItems] = useState([]);
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
+  const [isEditSessionModalOpen, setIsEditSessionModalOpen] = useState(false);
   // const [total, setTotal] = useState(0);
 
   const navigate = useNavigate();
@@ -67,15 +69,28 @@ export const SessionPage = () => {
   }, [sessionId]);
 
   const sessionLimit = session?.sessionLimit;
+  const sessionName = session?.sessionName;
   console.log('Sesion limit is', session?.sessionLimit);
+  console.log('Sesion name is', session?.sessionName);
 
   return (
     <div className="content">
       <BackButton path="/HomePage" />
       <div className="session-header">
         <div className="session-edit">
-          <h1>Session</h1>
-          <EditOutlinedIcon />
+          <h1>{sessionName}</h1>
+          <EditOutlinedIcon
+            onClick={() => {
+              setIsEditSessionModalOpen(!isEditSessionModalOpen);
+            }}
+          />
+          <EditSessionModal
+            isEditSessionModalOpen={isEditSessionModalOpen}
+            setIsEditSessionModalOpen={setIsEditSessionModalOpen}
+            sessionId={sessionId}
+            setSession={setSession}
+            sessionName={sessionName}
+          />
         </div>
         <div
           role="button"
@@ -132,13 +147,11 @@ export const SessionPage = () => {
             sessionId={sessionId}
             setSession={setSession}
           />
-          <button
+          <EditOutlinedIcon
             onClick={() => {
               setIsLimitModalOpen(!isLimitModalOpen);
             }}
-          >
-            Edit Limit
-          </button>
+          />
         </div>
 
         {session?.sessionLimit !== 0 && <LimitDonut spent={400} free={100} />}
