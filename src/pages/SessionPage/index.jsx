@@ -7,6 +7,7 @@ import { ReusableModal } from '../../components/ReusableModal';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { LimitDonut } from '../../components/LimitDonut';
 
 const polozky = [
   { id: 1, name: 'knedlo vepřo zelo', price: 250 },
@@ -74,12 +75,8 @@ export const SessionPage = () => {
         ))}
       </div>
 
-      <div className="limit-wrapper">
-        <ReusableModal
-          sessionLimit={sessionLimit}
-          setSessionLimit={setSessionLimit}
-        />
-      </div>
+      <div className="limit-wrapper"></div>
+      <LimitDonut spent={400} free={100} />
       <div className="price-wrapper">
         <div className="total-price">
           <span>Total:</span>
