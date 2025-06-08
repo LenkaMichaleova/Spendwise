@@ -43,8 +43,13 @@ export const ReusableModal = ({
     setIsModalOpen(false)
   }
 
+  const isDisabled = 
+    (username && !!userName) || 
+    (itemTag && (!!name && !!price && !!tag)) || 
+    (!itemTag && (!!name && !!price))
+
   return (
-    <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+    <Dialog disableRestoreFocus open={isModalOpen} onClose={() => setIsModalOpen(false)}>
       <div className="reusable-modal">
         <div className="reusable-modal__content">
           <form onSubmit={handleSubmit}>
@@ -130,7 +135,12 @@ export const ReusableModal = ({
                 />
               )}
 
-              <ReusableBtn title="Save" type="submit" />
+              <ReusableBtn 
+                title="Save" 
+                type="submit"
+                disabled={!isDisabled}
+
+              />
             </div>
           </form>
         </div>

@@ -6,7 +6,7 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import AddCardOutlinedIcon from '@mui/icons-material/AddCardOutlined';
 import NightlifeOutlinedIcon from '@mui/icons-material/NightlifeOutlined';
 
-export const SpeedDialTooltipOpen = ({ onSpendingClick }) => {
+export const SpeedDialTooltipOpen = ({ onSpendingClick, onSessionClick }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -19,7 +19,10 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick }) => {
       name: 'Spending',
       onClick: onSpendingClick,
     },
-    { icon: <NightlifeOutlinedIcon />, name: 'Session' },
+    { icon: <NightlifeOutlinedIcon />, 
+      name: 'Session',
+      onClick: onSessionClick 
+    },
   ];
 
   return (

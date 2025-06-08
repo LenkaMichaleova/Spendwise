@@ -21,7 +21,7 @@ export const AddSpending = ({ isModalOpen, setIsModalOpen }) => {
   };
 
   return (
-    <Dialog open={isModalOpen}>
+    <Dialog disableRestoreFocus open={isModalOpen}>
       <div className="add-spending-modal">
         <div className="add-spending-content">
           <form onSubmit={handleSubmit}>

@@ -1,17 +1,32 @@
+import { useNavigate } from 'react-router-dom';
 import { ReusableModal } from '../../components/ReusableModal';
 import { SpeedDialTooltipOpen } from '../../components/SpeedDial';
 import { SpendingItem } from '../../components/SpendingsItem';
 import './style.css';
 import { useState } from 'react';
+import { NewSessionModal } from '../../components/NewSessionModal';
 
 export const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSessionModalOpen, setIsSessionModalOpen] = useState(false)
   const [items, setItems] = useState([])
+  const navigate = useNavigate()
 
-  console.log(items)
+  const seznam = [ 
+    //spending
+    {name: "jméno", id:1, tag:"groceries", price: 0, icon},
+    //session
+    {name: "Název session", id:1, tag:"groceries", price: 0, icon, polozky: [{name: "jméno", id:1, tag:"eating-out", price: 0, icon}] }
+
+  ]
 
   const handleSubmit = (formItems) => {
     setItems(prevItems => [...prevItems, formItems])
+  }
+
+  const handleSessionSubmit = () => {
+
+    navigate("/Session")
   }
 
   return (
@@ -33,9 +48,17 @@ export const HomePage = () => {
         itemTag={true}
         onSubmit={handleSubmit}
       />
+
+      <NewSessionModal 
+        title="Name a session" 
+        isModalOpen={isSessionModalOpen} 
+        setIsModalOpen={setIsSessionModalOpen}
+        onSubmit={handleSessionSubmit}
+      />
+
       <SpeedDialTooltipOpen 
-      
-        onSpendingClick={() => setIsModalOpen(true)} 
+        onSpendingClick={() => setIsModalOpen(true)}
+        onSessionClick={() => setIsSessionModalOpen(true)} 
       />
     </div>
   );
