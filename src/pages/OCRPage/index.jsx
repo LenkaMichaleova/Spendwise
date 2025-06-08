@@ -4,12 +4,14 @@ import './style.css';
 import { Camera, Upload } from 'lucide-react'
 import { BackButton } from '../../components/BackButton';
 import { OCRItem } from '../../components/OCRItem';
+import { useParams } from 'react-router-dom';
 
 export const OCRPage = () => {
   const [image, setImage] = useState(null);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const {sessionId} = useParams()
 
   useEffect( () => {
     const handleOCR = async () => {
@@ -17,9 +19,7 @@ export const OCRPage = () => {
       setLoading(true);
       setError('');
       try {
-        const result = await Tesseract.recognize(image, 'ces', {
-          logger: m => console.log(m),
-        });
+        const result = await Tesseract.recognize(image, 'ces',);
         const text = result.data.text;
         await fetchItemsFromOpenAI(text);
       } catch (err) {
@@ -69,18 +69,32 @@ export const OCRPage = () => {
       const data = await response.json();
       const parsed = JSON.parse(data.choices[0].message.content);
       setItems(parsed.items || []);
-      console.log("response is", data.choices[0].message.content.items )
-      localStorage.setItem("temporary-items",JSON.stringify(data.choices[0].message.content.items))
+      const resp =  data.choices[0].message.content
+      const parsedRedp = JSON.parse(resp)
+      const itemsFromResp = parsedRedp.items
+
+      // localStorage.setItem("temporary-items",JSON.stringify(data.choices[0].message.content.items))
+
+      const localStorageItems = JSON.parse(localStorage.getItem('items'));
+      const matchingSession = localStorageItems.filter(
+        (item) => item.id === sessionId,
+      )?.[0];
+
+      matchingSession.temporaryItems = itemsFromResp
+
+      Object.assign(localStorageItems.find(item=> item.id === sessionId ), matchingSession)
+
+      localStorage.setItem("items", JSON.stringify(localStorageItems))
+
     } catch (err) {
       setError('This image is not readable');
       console.error(err);
     }
   };
 
-  console.log(temporaryItems)
   return (
     <div className='content'>
-      <BackButton path="/Session"/>
+      <BackButton path={`/Session/${sessionId}`}/>
   
       {items.length === 0 ?
       <div className='ocr-upload'>

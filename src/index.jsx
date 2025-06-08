@@ -77,6 +77,10 @@ const router = createBrowserRouter([
         path: '/Menu',
         element: <OCRPage />,
       },
+      {
+        path: '/Menu/:sessionId',
+        element: <OCRPage />,
+      },
     ],
   },
 ]);
