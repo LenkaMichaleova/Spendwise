@@ -31,7 +31,7 @@ export const HomePage = () => {
 
     localStorage.setItem("items", JSON.stringify([...currentLocalStorage, obj]))
 
-    navigate("/Session")
+    navigate(`/Session/${obj.id}`)
   }
 
   return (

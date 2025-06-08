@@ -62,6 +62,12 @@ const router = createBrowserRouter([
       {
         path: '/Session',
         element: <SessionPage />,
+        children: [
+          {
+            path: '/Session/:sessionId',
+            element: <SessionPage/>,
+          }
+        ]
       },
       {
         path: '/Stats',
