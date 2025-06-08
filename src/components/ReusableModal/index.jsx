@@ -32,13 +32,15 @@ export const ReusableModal = ({
 
     userName && localStorage.setItem("userName", userName.trim())
 
-    const objectToSend = { name, price, tag, limit }
+    const objectToSend = { name, price, tag, limit, id:crypto.randomUUID()}
     onSubmit(objectToSend)
     
     setName("")
     setPrice("")
     setTag("")
     setLimit("")
+
+    setIsModalOpen(false)
   }
 
   return (
