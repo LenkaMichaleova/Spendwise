@@ -12,13 +12,14 @@ export const NewSessionModal = ({
     onSubmit
   }) => {
   const [sessionName, setSessionName] = useState("Session")  
+  const [sessionLimit, setSessionLimit] = useState(0)  
 
   const isDisabled = !!sessionName
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const objectToSend = { sessionName, price: 0, tag: "eating-out", id:crypto.randomUUID()}
+    const objectToSend = { sessionName, price: 0, tag: "eating-out", sessionLimit, id:crypto.randomUUID()}
     onSubmit(objectToSend)
 
     setIsModalOpen(false)
@@ -47,6 +48,18 @@ export const NewSessionModal = ({
                 label="Session name"
                 variant="outlined"
               />
+
+              <TextField
+                sx={{ '& .MuiInputBase-root': { height: '50px' } }}
+                className="input"
+                onChange={(e) => setSessionLimit(e.target.value)}
+                type="number"
+                value={sessionLimit}
+                id="outlined-basic"
+                label="limit"
+                variant="outlined"
+              />
+
 
               <ReusableBtn 
                 title="Save" 

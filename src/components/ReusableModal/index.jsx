@@ -114,10 +114,10 @@ export const ReusableModal = ({
                 sx={{ '& .MuiInputBase-root': { height: '50px' } }}
                 className="input"
                 onChange={(e) => setLimit(e.target.value)}
-                type="text"
+                type="number"
                 value={limit}
                 id="outlined-basic"
-                label="Name"
+                label="Limit"
                 variant="outlined"
               />
               }

@@ -13,7 +13,13 @@ export const SpendingItem = ( {name, tag, price, icon} ) => {
           <Tag color={`var(--${tag})`}/>
         </span>
         <span className='item__price'>{price} Kč</span>
-        <span className='item__icon'>{icon}</span>
+        <span className='item__icon'>
+          {icon === "spendings" ?
+            <AddCardOutlinedIcon />
+          :
+            <NightlifeOutlinedIcon />
+          }
+        </span>
       </span>
     </button>
   )

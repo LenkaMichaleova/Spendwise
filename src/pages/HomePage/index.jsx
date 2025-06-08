@@ -21,7 +21,7 @@ export const HomePage = () => {
 
   const localStorageItems = JSON.parse(localStorage.getItem("items")) ?? []
   const finalList = localStorageItems.concat(items)
-  
+
   const handleSubmit = (formItems) => {
     setItems(prevItems => [...prevItems, formItems])
   }
@@ -40,7 +40,13 @@ export const HomePage = () => {
 
       <div className='spendings'>
         {finalList.map(item => 
-          <SpendingItem key={item.id} name={item.name || item.sessionName} price={item.price} tag={item.tag}/>
+          <SpendingItem 
+            key={item.id} 
+            name={item.name || item.sessionName} 
+            price={item.price} 
+            tag={item.tag} 
+            icon={item.name ? "spendings" : "session"}
+          />
         )}
       </div>
       
