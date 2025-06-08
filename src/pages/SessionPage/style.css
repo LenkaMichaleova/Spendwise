@@ -44,6 +44,16 @@
   font-weight: bolder;
 }
 
+/* .limit-price-wrapper {
+  display: flex;
+} */
+
+/* 
+.price-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
 
 @media (min-width: 800px) {
   .session-header {
