@@ -48,6 +48,11 @@ h1 {
   justify-content: center;
 }
 
+.content {
+  margin: 2% 5%;
+  width: 100%;
+}
+
 @media (min-width: 1000px) {
   body {
     background-image: none;
