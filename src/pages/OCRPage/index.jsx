@@ -79,7 +79,7 @@ export const OCRPage = () => {
 
   console.log(temporaryItems)
   return (
-    <div className='ocr-page'>
+    <div className='content'>
       <BackButton path="/Session"/>
   
       {items.length === 0 ?

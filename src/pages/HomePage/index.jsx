@@ -14,7 +14,7 @@ export const HomePage = () => {
   };
 
   return (
-    <div className="spendings">
+    <div className="content">
       <h1>Spendings</h1>
       <AddSpending isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <SpeedDialTooltipOpen onSpendingClick={onSpendingClick} />

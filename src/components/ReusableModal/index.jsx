@@ -31,7 +31,7 @@ export const ReusableModal = ({
   }
 
   return (
-    <Dialog open={isModalOpen}>
+    <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
       <div className="add-spending-modal">
         <div className="add-spending-content">
           <form onSubmit={handleSubmit}>
