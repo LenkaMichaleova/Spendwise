@@ -1,0 +1,9 @@
+.recharts-layer tspan {
+  fill: var(--primaryColor);
+}
+
+
+.recharts-layer .recharts-pie-label-line {
+  stroke: black;
+  opacity: 0.5;
+}

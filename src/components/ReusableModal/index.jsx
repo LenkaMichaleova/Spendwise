@@ -24,6 +24,7 @@ export const ReusableModal = ({
   const [price, setPrice] = useState('');
   const [tag, setTag] = useState('');
   const [limit, setLimit] = useState(null);
+
   const [userName, setUserName] = useState(localStorage.getItem('userName'));
 
   const handleSubmit = (e) => {
@@ -33,7 +34,15 @@ export const ReusableModal = ({
       localStorage.setItem('userName', userName.trim());
       setIsModalOpen(false);
     }
-    const objectToSend = { name, price, tag, limit, id: crypto.randomUUID(), count: 1 };
+    const objectToSend = {
+      name,
+      price,
+      tag,
+      limit,
+      id: crypto.randomUUID(),
+      date: new Date().toISOString(), //toto som pridala
+      count: 1,
+    };
     onSubmit(objectToSend);
 
     setName('');
