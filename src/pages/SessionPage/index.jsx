@@ -55,9 +55,14 @@ export const SessionPage = () => {
 
   const sessionLimit = session?.sessionLimit;
   const sessionName = session?.sessionName;
-
   const sessionTotal = session?.price;
-  console.log(sessionTotal);
+  console.log('This is current price', sessionTotal);
+
+  useEffect(() => {
+    if (session) {
+      setSession((old) => ({ ...old, price: totalPrice }));
+    }
+  }, [totalPrice]);
 
   return (
     <div className="content">

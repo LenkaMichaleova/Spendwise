@@ -21,7 +21,7 @@ export const NewSessionModal = ({
 
     const objectToSend = {
       sessionName,
-      price: 0,
+      price: Number(0),
       tag: 'eating-out',
       sessionLimit: Number(sessionLimit),
       id: crypto.randomUUID(),
