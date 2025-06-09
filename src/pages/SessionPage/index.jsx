@@ -21,16 +21,6 @@ export const SessionPage = () => {
   const navigate = useNavigate();
   const { sessionId } = useParams();
 
-  // const setItemCount = (id, count) => {
-  //   const newItems = items.map((item) => {
-  //     if (item.id === id) {
-  //       return { ...item, count: item.count + count };
-  //     }
-  //     return item;
-  //   });
-
-  //   setItems(newItems);
-  // };
 
   console.log(session)
 
@@ -120,7 +110,7 @@ export const SessionPage = () => {
             count={item.count}
             // setItemCount={setItemCount}
             key={`${item.name}-${index}`}
-            id={index}
+            id={item.id}
             name={item.name}
             price={item.price}
             setSession={setSession}
