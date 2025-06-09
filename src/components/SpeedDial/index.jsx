@@ -28,10 +28,7 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick, onSessionClick }) => {
           position: 'fixed', 
           bottom: 80, 
           right: 16, 
-          zIndex: 99,     
-          '@media (min-width:800px)': {
-            right: '20%',
-          }, 
+          zIndex: 99,
         }}>
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"

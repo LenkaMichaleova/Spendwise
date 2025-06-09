@@ -1,10 +1,23 @@
 import { useEffect, useState } from 'react';
 import Tesseract from 'tesseract.js';
 import './style.css';
-import { Camera, Upload } from 'lucide-react'
 import { BackButton } from '../../components/BackButton';
 import { OCRItem } from '../../components/OCRItem';
 import { useParams } from 'react-router-dom';
+import { ReusableBtn } from '../../components/ReusableBtn';
+import { OCRUpload } from '../../components/OCRUpload';
+
+const items2 = [
+  {name:"houska", price: 40, description: "Velmi chutné pečivo"},
+  {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
+  {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
+    {name:"houska", price: 40, description: "Velmi chutné pečivo"},
+  {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
+  {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
+    {name:"houska", price: 40, description: "Velmi chutné pečivo"},
+  {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
+  {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
+]
 
 export const OCRPage = () => {
   const [image, setImage] = useState(null);
@@ -95,42 +108,27 @@ export const OCRPage = () => {
   return (
     <div className='content'>
       <BackButton path={`/Session/${sessionId}`}/>
-  
-      {items.length === 0 ?
-      <div className='ocr-upload'>
-        <label htmlFor="uploadCamera" className='ocr-upload__btn mobile-mode'>
-          <Camera color="var(--primaryColor)" size={30}/>
-          Take photo of menu
-        </label>
-        <input 
-          id='uploadCamera' 
-          className='hidden' 
-          type="file" 
-          accept="image/*" 
-          capture="environment"
-          onChange={handleImageChange}
-        />
+      
+      {items2.length === 0 ?
+      <>
+        <div className='ocr-upload'>
+          <OCRUpload size="big" onChange={handleImageChange}/>
           
-        <label htmlFor="uploadFile" className='ocr-upload__btn'>
-          <Upload color="var(--primaryColor)" size={30}/>
-          Upload an image
-        </label>
-        <input 
-          id='uploadFile' 
-          className='hidden' 
-          type="file" 
-          accept="image/*" 
-          onChange={handleImageChange}
-        />
-        
-        {image && <img className='obrazek' src={image}/>}
-        {loading && 'Zpracovávám...'}
-        {error && <p>{error}</p>}
-      </div>
+          {image && <img className='obrazek' src={image}/>}
+          {loading && 'Zpracovávám...'}
+          {error && <p>{error}</p>}
+        </div>
+      </>
 
       :
+      <>
+        <div className='ocr__items-header'>
+          <OCRUpload size="small" onChange={handleImageChange}/>
+        </div>
         <div className='ocr__items-box'>
-          {items.map((item, index) =>
+
+
+          {items2.map((item, index) =>
             <OCRItem 
               key={`${item.name}-${index}`} 
               name={item.name} 
@@ -138,8 +136,14 @@ export const OCRPage = () => {
               description={item.description}
             />
           )}
+          
+          <div className='ocr__save-items'>
+            <ReusableBtn title="Save" type="submit" />
+          </div>
         </div>
-    }
+      </>
+      }
+
     </div>
   );
 };

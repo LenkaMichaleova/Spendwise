@@ -30,11 +30,31 @@
 }
 
 .ocr__items-box {
-  width: 90vw;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 1.5rem;
+  margin: 0;
+  
   display: flex;
   flex-direction: column;
-  margin: 3% auto;
   gap: 10px;
+  margin-bottom: 5rem;
+}
+
+.ocr__items-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 3rem;
+}
+
+.ocr__save-items button{
+  z-index: 99;
+  width: 30vw;
+  position: fixed;
+  bottom: 5rem;
+  right: 4rem;  
 }
 
 .hidden {
@@ -60,11 +80,20 @@
   }
   
   .ocr__items-box {
-    width: 40vw;
-    margin: 0;
+    width: 60%;
+    max-height: 80vh;
+    margin: 1rem 0;
+  }
+
+  .ocr__items-header{
+    width: 55vw;
   }
 
   .mobile-mode {
     display: none;
+  }
+
+  .ocr__item {
+    width: 40vw;
   }
 }

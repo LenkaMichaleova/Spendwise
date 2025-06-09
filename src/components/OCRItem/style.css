@@ -1,6 +1,6 @@
 .ocr__item {
-  width: 90vw;
-  padding: 2% 4%;
+  width: 100%;
+  padding: 3%;
   background-color: var(--secondaryColor);
   border: none;
   border-radius: 0.5rem;
@@ -34,4 +34,10 @@
     font-size: smaller;
     color: grey;
     width: 85%;
+}
+
+@media (min-width: 800px) {
+  .ocr__item {
+    width: 40vw;
+  }
 }

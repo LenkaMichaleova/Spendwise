@@ -1,0 +1,7 @@
+.ocr-upload__inline {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-right: 2%;
+    margin-top: -2rem;
+}
