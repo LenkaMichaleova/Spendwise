@@ -21,18 +21,12 @@ export const SessionPage = () => {
   const navigate = useNavigate();
   const { sessionId } = useParams();
 
-
-  console.log(session)
-
-  // const totalPrice = items.reduce(
-  //   (acc, polozka) => acc + polozka.price * polozka.count,
-  //   0,
-  // );
-
   const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
   const sessionItems = localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
 
-  console.log("sessionItems",sessionItems)
+  const totalPrice = sessionItems.reduce((sum, item) => {
+    return sum + item.price * item.count;
+  }, 0);
 
   const handleSubmit = (obj) => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
@@ -60,7 +54,6 @@ export const SessionPage = () => {
 
   const sessionLimit = session?.sessionLimit;
   const sessionName = session?.sessionName;
-
   const sessionTotal = session?.price
   console.log(sessionTotal)
 
@@ -108,13 +101,11 @@ export const SessionPage = () => {
         {sessionItems?.map((item, index) => (
           <SessionItem
             count={item.count}
-            // setItemCount={setItemCount}
             key={`${item.name}-${index}`}
-            id={item.id}
+            id={index}
             name={item.name}
             price={item.price}
             setSession={setSession}
-            // setItems={setItems}
           />
         ))}
       </div>
@@ -149,12 +140,12 @@ export const SessionPage = () => {
         </div>
         
         <div className="limit-donut">
-        {/* {session?.sessionLimit !== 0 && <LimitDonut spent={totalPrice} free={sessionLimit - totalPrice} />} */}
+        {session?.sessionLimit !== 0 && <LimitDonut spent={totalPrice} free={sessionLimit - totalPrice} />}
         </div>
 
         <div className="price-wrapper">
           <div>Total:</div>
-          {/* <div><strong>{totalPrice}</strong> Kč</div> */}
+          <div><strong>{totalPrice}</strong> Kč</div>
         </div>
       </div>
 

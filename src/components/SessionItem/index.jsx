@@ -1,7 +1,6 @@
 import './style.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export const SessionItem = ({
@@ -9,47 +8,48 @@ export const SessionItem = ({
   name,
   price,
   count,
-  setSession
+  setSession,
 }) => {
-
-  const { sessionId } = useParams()
+  const { sessionId } = useParams();
 
   const handlePlus = () => {
-    const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
-    const matchingSession = localStorageItems.find(item => item.id === sessionId);
+    const localStorageItems = JSON.parse(localStorage.getItem('items')) || [];
+    const sessionIndex = localStorageItems.findIndex(
+      (item) => item.id === sessionId,
+    );
 
-    const itemIndex = matchingSession.items.findIndex(item => item.id === id);
-
-    matchingSession.items[itemIndex].count += 1;
-    
+    if (sessionId === -1) return;
+    const sessionItems = localStorageItems[sessionIndex].items;
+    if (sessionItems[id]) {
+      sessionItems[id].count += 1;
+    }
+    localStorageItems[sessionIndex].items = sessionItems;
     localStorage.setItem('items', JSON.stringify(localStorageItems));
-    setSession({ ...matchingSession });
+    setSession((old) => ({ ...old, items: sessionItems }));
   };
 
   const handleMinus = () => {
-    const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
-    const matchingSession = localStorageItems.find(item => item.id === sessionId);
-    const itemIndex = matchingSession.items.findIndex(item => item.id === id);
+    const localStorageItems = JSON.parse(localStorage.getItem('items')) || [];
+    const sessionIndex = localStorageItems.findIndex(
+      (item) => item.id === sessionId,
+    );
 
-    if (count === 1) {
+    if (sessionId === -1) return;
+    const sessionItems = localStorageItems[sessionIndex].items;
+    if (sessionItems[id].count === 1) {
       const isConfirmed = window.confirm(
         'Are you sure you want to delete this item?',
       );
-      if (isConfirmed) {
-        matchingSession.splice(itemIndex, 1)
-        setSession(...matchingSession)
-      }
+      if (!isConfirmed) return;
+      sessionItems.splice(id, 1);
     } else {
-      matchingSession.items[itemIndex].count -= 1;
-        
-      localStorage.setItem('items', JSON.stringify(localStorageItems));
-      setSession({ ...matchingSession });
+      sessionItems[id].count -= 1;
     }
+    localStorageItems[sessionIndex].items = sessionItems;
+    localStorage.setItem('items', JSON.stringify(localStorageItems));
+    setSession((old) => ({ ...old, items: sessionItems }));
   };
 
-  useEffect(() => {
-    setSession()
-  },[])
 
   return (
     <div className="session__item">
