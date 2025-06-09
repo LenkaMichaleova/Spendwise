@@ -8,9 +8,9 @@ export const StatsPage = () => {
 
   return (
     <div className="content">
-      <h1>Overall</h1>
+      <h1>Monthly Overall</h1>
       <DonutChart data={localStorageItems} />
-      <BarGraph data={localStorageItems} />
+      {/* <BarGraph data={localStorageItems} /> */}
     </div>
   );
 };

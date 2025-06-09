@@ -5,28 +5,39 @@ import './style.css';
 import { useState } from 'react';
 import { ReusableBtn } from '../ReusableBtn';
 
-export const NewSessionModal = ({ 
-    title, 
-    isModalOpen, 
-    setIsModalOpen, 
-    onSubmit
-  }) => {
-  const [sessionName, setSessionName] = useState("Session")  
-  const [sessionLimit, setSessionLimit] = useState(0)  
+export const NewSessionModal = ({
+  title,
+  isModalOpen,
+  setIsModalOpen,
+  onSubmit,
+}) => {
+  const [sessionName, setSessionName] = useState('Session');
+  const [sessionLimit, setSessionLimit] = useState(0);
 
-  const isDisabled = !!sessionName
+  const isDisabled = !!sessionName;
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const objectToSend = { sessionName, price: 0, tag: "eating-out", sessionLimit: Number(sessionLimit), id:crypto.randomUUID()}
-    onSubmit(objectToSend)
+    const objectToSend = {
+      sessionName,
+      price: 0,
+      tag: 'eating-out',
+      sessionLimit: Number(sessionLimit),
+      id: crypto.randomUUID(),
+      date: new Date().toISOString(),
+    }; //pridané
+    onSubmit(objectToSend);
 
-    setIsModalOpen(false)
-  }
+    setIsModalOpen(false);
+  };
 
   return (
-    <Dialog disableRestoreFocus open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+    <Dialog
+      disableRestoreFocus
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    >
       <div className="reusable-modal">
         <div className="reusable-modal__content">
           <form onSubmit={handleSubmit}>
@@ -60,12 +71,7 @@ export const NewSessionModal = ({
                 variant="outlined"
               />
 
-
-              <ReusableBtn 
-                title="Save" 
-                type="submit"
-                disabled={!isDisabled}
-              />
+              <ReusableBtn title="Save" type="submit" disabled={!isDisabled} />
             </div>
           </form>
         </div>
