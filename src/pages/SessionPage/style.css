@@ -2,12 +2,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 3rem;
 }
 
 .session-edit {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.session-edit h1 {
+  margin: 1rem 0;
+}
+
+.session-edit svg {
+  width: 20%;
 }
 
 .session-menu {
