@@ -160,7 +160,7 @@ export const SessionPage = () => {
         </div>
         
         <div className="limit-donut">
-        {session?.sessionLimit !== 0 && <LimitDonut spent={400} free={100} />}
+        {session?.sessionLimit !== 0 && <LimitDonut spent={totalPrice} free={sessionLimit - totalPrice} />}
         </div>
 
         <div className="price-wrapper">
