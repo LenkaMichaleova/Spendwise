@@ -21,19 +21,7 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
     localStorage.setItem('items', JSON.stringify(localStorageItems));
     setSession((old) => ({ ...old, items: sessionItems }));
   };
-
-  // const handleMinus = () => {
-  //   if (count === 1) {
-  //     const isConfirmed = window.confirm(
-  //       'Are you sure you want to delete this item?',
-  //     );
-  //     if (isConfirmed) {
-  //       setItems((old) => old.filter((item) => item.id !== id));
-  //     }
-  //   } else {
-  //     setItemCount(id, -1);
-  //   }
-  // };
+  
   const handleMinus = () => {
     const localStorageItems = JSON.parse(localStorage.getItem('items')) || [];
     const sessionIndex = localStorageItems.findIndex(

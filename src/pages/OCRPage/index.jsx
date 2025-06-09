@@ -8,43 +8,32 @@ import { ReusableBtn } from '../../components/ReusableBtn';
 import { OCRUpload } from '../../components/OCRUpload';
 import { Camera, Upload } from 'lucide-react'
 
-const items2 = [
-  {name:"houska", price: 40, description: "Velmi chutné pečivo"},
-  {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
-  {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
-  {name:"houska", price: 40, description: "Velmi chutné pečivo"},
-  {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
-  {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
-  {name:"houska", price: 40, description: "Velmi chutné pečivo"},
-  {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
-  {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
-]
-
 export const OCRPage = () => {
   const [image, setImage] = useState(null);
-  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [items, setItems] = useState([]);
+  const [selectedTemporaryItems, setSelectedTemporaryItems] = useState([])
+  const [items2, setItems2] = useState([
+    {name:"houska", price: 40, description: "Velmi chutné pečivo", selected: false},
+    {name: "rohlík", price: 3, description: "mňamka, která chutná každému", selected: false},
+    {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes", selected: false},
+  ]);
+
   const {sessionId} = useParams()
 
-  useEffect( () => {
-    const handleOCR = async () => {
-      if (!image) return;
-      setLoading(true);
-      setError('');
-      try {
-        const result = await Tesseract.recognize(image, 'ces',);
-        const text = result.data.text;
-        await fetchItemsFromOpenAI(text);
-      } catch (err) {
-        setError('Chyba při čtení textu.');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    handleOCR()
-  }, [image])
+  const handleSelect = (index) => {
+    const newItems = [...items2];
+    newItems[index].selected = !newItems[index].selected;
+    setItems2(newItems);
+  };
+
+  const handleSave = () => {
+    const selectedItems = items2.filter(item => item.selected);
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    setSelectedTemporaryItems(selectedItems)
+  };
+  console.log(selectedTemporaryItems)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -98,7 +87,7 @@ export const OCRPage = () => {
       matchingSession.temporaryItems = itemsFromResp
 
       Object.assign(localStorageItems.find(item=> item.id === sessionId ), matchingSession)
-
+      
       localStorage.setItem("items", JSON.stringify(localStorageItems))
 
     } catch (err) {
@@ -106,6 +95,29 @@ export const OCRPage = () => {
       console.error(err);
     }
   };
+
+  useEffect( () => {
+    const handleOCR = async () => {
+      if (!image) return;
+      setLoading(true);
+      setError('');
+      try {
+        const result = await Tesseract.recognize(image, 'ces',);
+        const text = result.data.text;
+        await fetchItemsFromOpenAI(text);
+      } catch (err) {
+        setError('Chyba při čtení textu.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    handleOCR()
+  }, [image])
+
+  // useEffect(() => {
+
+  // }, [selectedTemporaryItems])
 
   return (
     <div className='content'>
@@ -179,11 +191,13 @@ export const OCRPage = () => {
               name={item.name} 
               price={item.price} 
               description={item.description}
+              selected={item.selected}
+              onSelect={() => handleSelect(index)}
             />
           )}
           
           <div className='ocr__save-items'>
-            <ReusableBtn title="Save" type="submit" />
+            <ReusableBtn title="Save" type="submit" onClick={handleSave}/>
           </div>
         </div>
       </>

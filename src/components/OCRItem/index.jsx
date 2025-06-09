@@ -4,7 +4,6 @@ import Checkbox from '@mui/material/Checkbox';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' }  };
 
 export const OCRItem = ( {name, price, description, selected, onSelect} ) => {
-
   return(
     <label className='ocr__item'>
       <div className='ocr__item--prvni-radek'> 

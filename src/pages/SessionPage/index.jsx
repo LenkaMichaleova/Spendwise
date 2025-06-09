@@ -22,8 +22,7 @@ export const SessionPage = () => {
   const { sessionId } = useParams();
 
   const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
-  const sessionItems =
-    localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
+  const sessionItems = localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
 
   const totalPrice = sessionItems.reduce((sum, item) => {
     return sum + item.price * item.count;
