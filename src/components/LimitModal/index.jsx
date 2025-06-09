@@ -16,7 +16,7 @@ export const LimitModal = ({
     e.preventDefault();
     const newLimitValue = Number(e.target.limit.value);
     setIsLimitModalOpen(false);
-    console.log(newLimitValue);
+    // console.log(newLimitValue);
 
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter(

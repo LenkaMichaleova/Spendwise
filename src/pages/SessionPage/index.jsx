@@ -25,29 +25,9 @@ export const SessionPage = () => {
   const sessionItems =
     localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
 
-  // const setItemCount = (id, count) => {
-  //   const newItems = items.map((item) => {
-  //     if (item.id === id) {
-  //       return { ...item, count: item.count + count };
-  //     }
-  //     return item;
-  //   });
-
-  //   setItems(newItems);
-  // };
-
-  console.log(session);
-
-  // const totalPrice = items.reduce(
-  //   (acc, polozka) => acc + polozka.price * polozka.count,
-  //   0,
-  // );
-
   const totalPrice = sessionItems.reduce((sum, item) => {
     return sum + item.price * item.count;
   }, 0);
-
-  console.log('sessionItems', sessionItems);
 
   const handleSubmit = (obj) => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
@@ -125,13 +105,11 @@ export const SessionPage = () => {
         {sessionItems?.map((item, index) => (
           <SessionItem
             count={item.count}
-            // setItemCount={setItemCount}
             key={`${item.name}-${index}`}
             id={index}
             name={item.name}
             price={item.price}
             setSession={setSession}
-            // setItems={setItems}
           />
         ))}
       </div>
