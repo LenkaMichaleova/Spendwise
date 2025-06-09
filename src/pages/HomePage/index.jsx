@@ -59,21 +59,6 @@ export const HomePage = () => {
         onSubmit={handleSessionSubmit}
       />
 
-      <div className="spendings-logo">
-        <div className="title-logo">
-          <img
-            className="logo-image"
-            src="../src/components/Header/img/logo1.png"
-            alt="logo"
-          ></img>
-          <p>Spendwise</p>
-        </div>
-        <div className="title-page__heading">
-          <div>Track your spending.</div>
-          <div>Pay what's fair.</div>
-        </div>
-      </div>
-
       <SpeedDialTooltipOpen 
         onSpendingClick={() => setIsModalOpen(true)}
         onSessionClick={() => setIsSessionModalOpen(true)} 
