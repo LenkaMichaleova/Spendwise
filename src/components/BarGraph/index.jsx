@@ -19,7 +19,7 @@ export const BarGraph = ({ data, view }) => {
 
   for (let i = 0; i < data.length; i++) {
     const date = new Date(data[i].date);
-    let include = false; // premenná - má započítať item do grafu
+    let include = false;
 
     if (view === 'Monthly') {
       include =
@@ -30,7 +30,7 @@ export const BarGraph = ({ data, view }) => {
         date.getMonth() === currentMonth &&
         date.getFullYear() === currentYear;
     }
-    if (!include) continue; // pokiaľ položka nemá byť zarátaná, preskočím ju a pojdem na dalsiu
+    if (!include) continue;
 
     const dayOfMonth = date.getDate();
     spendingPerDay[dayOfMonth - 1] += Number(data[i].price);
@@ -46,7 +46,6 @@ export const BarGraph = ({ data, view }) => {
 
   return (
     <div className="bargraph-wrapper" style={{ width: '100%', height: 170 }}>
-      <p>{view}</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />

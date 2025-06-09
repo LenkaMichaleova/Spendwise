@@ -2,7 +2,7 @@ import './style.css';
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
-export const DonutChart = ({ data, view }) => {
+export const DonutChart = ({ data, view, setTotalPrice }) => {
   const colors = {
     groceries: '#87CEEB',
     'eating-out': '#79CB9C',
@@ -12,16 +12,9 @@ export const DonutChart = ({ data, view }) => {
   };
 
   console.log('Here is you dream data', data);
+  const currentDay = new Date().getDate();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
-
-  // const tags = [
-  //   'groceries',
-  //   'eating-out',
-  //   'entertainment',
-  //   'transport-and-travel',
-  //   'other',
-  // ];
 
   const tags = [
     { id: 'groceries', label: 'Groceries' },
@@ -35,13 +28,18 @@ export const DonutChart = ({ data, view }) => {
 
   for (let i = 0; i < data.length; i++) {
     const date = new Date(data[i].date);
+    let include = false;
 
-    if (
-      date.getMonth() !== currentMonth ||
-      date.getFullYear() !== currentYear
-    ) {
-      continue;
+    if (view === 'Monthly') {
+      include =
+        date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+    } else if (view === 'Daily') {
+      include =
+        date.getDate() === currentDay &&
+        date.getMonth() === currentMonth &&
+        date.getFullYear() === currentYear;
     }
+    if (!include) continue;
 
     const itemTag = data[i].tag;
     const tagIndex = tags.findIndex((tag) => tag.id === itemTag);
@@ -63,6 +61,11 @@ export const DonutChart = ({ data, view }) => {
   if (filteredData.length === 0) {
     return <p>No data available for this month. </p>;
   }
+
+  const overallPrice = filteredData.reduce((sum, item) => sum + item.price, 0);
+  console.log('Total Monthly Spending:', overallPrice);
+
+  setTotalPrice(overallPrice);
 
   return (
     <div className="donutchart-wrapper">
@@ -116,7 +119,6 @@ export const DonutChart = ({ data, view }) => {
           </ul>
         </div>
       </ResponsiveContainer>
-      <p>{view}</p>
     </div>
   );
 };
