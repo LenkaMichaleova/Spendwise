@@ -6,15 +6,16 @@ import { OCRItem } from '../../components/OCRItem';
 import { useParams } from 'react-router-dom';
 import { ReusableBtn } from '../../components/ReusableBtn';
 import { OCRUpload } from '../../components/OCRUpload';
+import { Camera, Upload } from 'lucide-react'
 
 const items2 = [
   {name:"houska", price: 40, description: "Velmi chutné pečivo"},
   {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
   {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
-    {name:"houska", price: 40, description: "Velmi chutné pečivo"},
+  {name:"houska", price: 40, description: "Velmi chutné pečivo"},
   {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
   {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
-    {name:"houska", price: 40, description: "Velmi chutné pečivo"},
+  {name:"houska", price: 40, description: "Velmi chutné pečivo"},
   {name: "rohlík", price: 3, description: "mňamka, která chutná každému"},
   {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes"},
 ]
@@ -45,7 +46,6 @@ export const OCRPage = () => {
     handleOCR()
   }, [image])
 
-  const temporaryItems = localStorage.getItem("temporary-items")
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -87,12 +87,14 @@ export const OCRPage = () => {
       const itemsFromResp = parsedRedp.items
 
       // localStorage.setItem("temporary-items",JSON.stringify(data.choices[0].message.content.items))
+      // console.log(data.choices[0].message.content.items)
+      // const temporaryItems = localStorage.getItem("temporary-items")
+      // console.log(temporaryItems)
 
       const localStorageItems = JSON.parse(localStorage.getItem('items'));
       const matchingSession = localStorageItems.filter(
         (item) => item.id === sessionId,
       )?.[0];
-
       matchingSession.temporaryItems = itemsFromResp
 
       Object.assign(localStorageItems.find(item=> item.id === sessionId ), matchingSession)
@@ -112,8 +114,30 @@ export const OCRPage = () => {
       {items2.length === 0 ?
       <>
         <div className='ocr-upload'>
-          <OCRUpload size="big" onChange={handleImageChange}/>
-          
+          <label htmlFor="uploadCamera" className="ocr-upload__btn mobile-mode">
+            <Camera color="var(--primaryColor)" size={30}/>
+            Take photo of a menu
+          </label>
+          <input 
+            id="uploadCamera"
+            className="hidden" 
+            type="file" 
+            accept="image/*" 
+            capture="environment"
+            onChange={handleImageChange}
+          />
+
+          <label htmlFor="uploadFile" className='ocr-upload__btn'>
+            <Upload color="var(--primaryColor)" size={30}/>
+            Upload an image
+          </label>
+          <input 
+            id='uploadFile' 
+            className='hidden' 
+            type="file" 
+            accept="image/*" 
+            onChange={handleImageChange}
+          />          
           {image && <img className='obrazek' src={image}/>}
           {loading && 'Zpracovávám...'}
           {error && <p>{error}</p>}
@@ -123,10 +147,31 @@ export const OCRPage = () => {
       :
       <>
         <div className='ocr__items-header'>
-          <OCRUpload size="small" onChange={handleImageChange}/>
-        </div>
-        <div className='ocr__items-box'>
+        <div className='ocr-upload__inline'>
+          <label htmlFor="uploadCamera" className="mobile-mode">
+            <Camera color="var(--primaryColor)" size={35}/>
+          </label>
+          <input 
+            id="uploadCamera" 
+            className="hidden"
+            type="file" 
+            accept="image/*" 
+            capture="environment"
+            onChange={handleImageChange}
+          />
 
+          <label htmlFor="uploadFile">
+            <Upload color="var(--primaryColor)" size={30}/>
+          </label>
+          <input 
+            id='uploadFile' 
+            className='hidden' 
+            type="file" 
+            accept="image/*" 
+            onChange={handleImageChange}
+          />
+        </div>        </div>
+        <div className='ocr__items-box'>
 
           {items2.map((item, index) =>
             <OCRItem 
@@ -143,7 +188,6 @@ export const OCRPage = () => {
         </div>
       </>
       }
-
     </div>
   );
 };
