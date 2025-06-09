@@ -21,6 +21,10 @@ export const SessionPage = () => {
   const navigate = useNavigate();
   const { sessionId } = useParams();
 
+  const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
+  const sessionItems =
+    localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
+
   // const setItemCount = (id, count) => {
   //   const newItems = items.map((item) => {
   //     if (item.id === id) {
@@ -32,17 +36,18 @@ export const SessionPage = () => {
   //   setItems(newItems);
   // };
 
-  console.log(session)
+  console.log(session);
 
   // const totalPrice = items.reduce(
   //   (acc, polozka) => acc + polozka.price * polozka.count,
   //   0,
   // );
 
-  const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
-  const sessionItems = localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
+  const totalPrice = sessionItems.reduce((sum, item) => {
+    return sum + item.price * item.count;
+  }, 0);
 
-  console.log("sessionItems",sessionItems)
+  console.log('sessionItems', sessionItems);
 
   const handleSubmit = (obj) => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
@@ -71,17 +76,19 @@ export const SessionPage = () => {
   const sessionLimit = session?.sessionLimit;
   const sessionName = session?.sessionName;
 
-  const sessionTotal = session?.price
-  console.log(sessionTotal)
+  const sessionTotal = session?.price;
+  console.log(sessionTotal);
 
   return (
     <div className="content">
       <BackButton path="/HomePage" />
       <div className="session-header">
         <div className="session-edit">
-          <h1 onClick={() => {
+          <h1
+            onClick={() => {
               setIsEditSessionModalOpen(!isEditSessionModalOpen);
-            }}>
+            }}
+          >
             {sessionName}
           </h1>
           <EditOutlinedIcon
@@ -131,14 +138,15 @@ export const SessionPage = () => {
 
       <div className="limit-price-wrapper">
         <div className="limit">
-          <span className='limit-header'>Limit:</span>
-          <span className='limit-edit'>
-            <span><strong>
-              {session?.sessionLimit === 0
-                ? ' - '
-                : `${session?.sessionLimit} Kč`}
-            
-            </strong></span>
+          <span className="limit-header">Limit:</span>
+          <span className="limit-edit">
+            <span>
+              <strong>
+                {session?.sessionLimit === 0
+                  ? ' - '
+                  : `${session?.sessionLimit} Kč`}
+              </strong>
+            </span>
             <span>
               <LimitModal
                 isLimitModalOpen={isLimitModalOpen}
@@ -147,7 +155,7 @@ export const SessionPage = () => {
                 sessionId={sessionId}
                 setSession={setSession}
               />
-              <span className='change-limit'>
+              <span className="change-limit">
                 <EditOutlinedIcon
                   onClick={() => {
                     setIsLimitModalOpen(!isLimitModalOpen);
@@ -157,14 +165,18 @@ export const SessionPage = () => {
             </span>
           </span>
         </div>
-        
+
         <div className="limit-donut">
-        {/* {session?.sessionLimit !== 0 && <LimitDonut spent={totalPrice} free={sessionLimit - totalPrice} />} */}
+          {session?.sessionLimit !== 0 && (
+            <LimitDonut spent={totalPrice} free={sessionLimit - totalPrice} />
+          )}
         </div>
 
         <div className="price-wrapper">
           <div>Total:</div>
-          {/* <div><strong>{totalPrice}</strong> Kč</div> */}
+          <div>
+            <strong>{totalPrice}</strong> Kč
+          </div>
         </div>
       </div>
 

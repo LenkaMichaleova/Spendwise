@@ -11,46 +11,82 @@ export const SessionItem = ({
   count,
   setItems,
   // setItemCount,
-  setSession
+  setSession,
 }) => {
+  const { sessionId } = useParams();
 
-  const [itemCount, setItemCount] = useState()
-  const { sessionId } = useParams()
+  // const handlePlus = () => {
+  //   const localStorageItems = JSON.parse(localStorage.getItem('items'));
+  //   console.log('localStorageItems', localStorageItems);
+
+  //   const matchingSession = localStorageItems.filter(
+  //     (item) => item.id === sessionId,
+  //   )?.[0];
+  //   console.log('matching session', matchingSession);
+
+  //   const sessionItems = matchingSession.items;
+  //   console.log('sessionItems', sessionItems);
+
+  //   // const itemCount = sessionItems[id].count
+  //   // console.log("itemCount", itemCount)
+
+  //   // itemCount = ((old) => old + 1)
+  //   // console.log('itemCount', uptdateCount);
+  //   // let newCount = (sessionItems[id].count += 1);
+  //   setItemCount((old) => old + 1);
+  //   sessionItems[id].count = itemCount;
+
+  //   setSession((old) => ({ ...old, count: sessionItems[id].count }));
+  // };
 
   const handlePlus = () => {
-
-    const localStorageItems = JSON.parse(localStorage.getItem('items'));
-    console.log("localStorageItems", localStorageItems)
-
-    const matchingSession = localStorageItems.filter(
+    const localStorageItems = JSON.parse(localStorage.getItem('items')) || [];
+    const sessionIndex = localStorageItems.findIndex(
       (item) => item.id === sessionId,
-    )?.[0];
-    console.log("matching session",matchingSession)
+    );
 
-    const sessionItems = matchingSession.items
-    console.log("sessionItems", sessionItems)
-
-    const itemCount = sessionItems[id].count
-    console.log("itemCount", itemCount)
-    
-    
-    itemCount = ((old) => old + 1)
-    console.log("itemCount", uptdateCount)
-
-    setSession((old) => ({ ...old, count: sessionItems[id].count + 1 }))
+    if (sessionId === -1) return;
+    const sessionItems = localStorageItems[sessionIndex].items; //zoberieme v3etkz items zo session
+    if (sessionItems[id]) {
+      sessionItems[id].count += 1;
+    }
+    localStorageItems[sessionIndex].items = sessionItems;
+    localStorage.setItem('items', JSON.stringify(localStorageItems));
+    setSession((old) => ({ ...old, items: sessionItems }));
   };
 
+  // const handleMinus = () => {
+  //   if (count === 1) {
+  //     const isConfirmed = window.confirm(
+  //       'Are you sure you want to delete this item?',
+  //     );
+  //     if (isConfirmed) {
+  //       setItems((old) => old.filter((item) => item.id !== id));
+  //     }
+  //   } else {
+  //     setItemCount(id, -1);
+  //   }
+  // };
   const handleMinus = () => {
-    if (count === 1) {
+    const localStorageItems = JSON.parse(localStorage.getItem('items')) || [];
+    const sessionIndex = localStorageItems.findIndex(
+      (item) => item.id === sessionId,
+    ); // index aktualnej session podla session id
+
+    if (sessionId === -1) return; // ak nenajde tak nič
+    const sessionItems = localStorageItems[sessionIndex].items; //yoberieme v3etkz items yo session
+    if (sessionItems[id].count === 1) {
       const isConfirmed = window.confirm(
         'Are you sure you want to delete this item?',
       );
-      if (isConfirmed) {
-        setItems((old) => old.filter((item) => item.id !== id));
-      }
+      if (!isConfirmed) return;
+      sessionItems.splice(id, 1);
     } else {
-      setItemCount(id, -1);
+      sessionItems[id].count -= 1;
     }
+    localStorageItems[sessionIndex].items = sessionItems;
+    localStorage.setItem('items', JSON.stringify(localStorageItems));
+    setSession((old) => ({ ...old, items: sessionItems }));
   };
 
   return (
