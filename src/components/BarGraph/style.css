@@ -1,0 +1,15 @@
+.recharts-surface {
+  width: 100%;
+}
+
+.bargraph-wrapper {
+  margin-left: -1rem;
+}
+
+/* @media (max-width: 1000px) {
+
+
+  .bargraph-wrapper {
+    background-color: lightgray;
+  }
+} */

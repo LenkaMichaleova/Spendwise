@@ -1,3 +1,4 @@
+import './style.css';
 import {
   BarChart,
   Bar,
@@ -9,7 +10,8 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-export const BarGraph = ({ data }) => {
+export const BarGraph = ({ data, view }) => {
+  const currentDay = new Date().getDate();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -17,13 +19,18 @@ export const BarGraph = ({ data }) => {
 
   for (let i = 0; i < data.length; i++) {
     const date = new Date(data[i].date);
+    let include = false; // premenná - má započítať item do grafu
 
-    if (
-      date.getMonth() !== currentMonth ||
-      date.getFullYear() !== currentYear
-    ) {
-      continue;
+    if (view === 'Monthly') {
+      include =
+        date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+    } else if (view === 'Daily') {
+      include =
+        date.getDate() === currentDay &&
+        date.getMonth() === currentMonth &&
+        date.getFullYear() === currentYear;
     }
+    if (!include) continue; // pokiaľ položka nemá byť zarátaná, preskočím ju a pojdem na dalsiu
 
     const dayOfMonth = date.getDate();
     spendingPerDay[dayOfMonth - 1] += Number(data[i].price);
@@ -38,9 +45,9 @@ export const BarGraph = ({ data }) => {
   const averageSpending = totalSpending / spendingPerDay.length;
 
   return (
-    <div style={{ width: '100%', height: 250, marginBottom: 50 }}>
-      <h2>Monthly spending for June</h2>
-      <ResponsiveContainer width="80%" height="80%">
+    <div className="bargraph-wrapper" style={{ width: '100%', height: 170 }}>
+      <p>{view}</p>
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="day" interval={1} tick={{ fontSize: 10 }} />

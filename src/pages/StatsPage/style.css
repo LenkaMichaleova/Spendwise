@@ -1,1 +1,10 @@
+/* .content {
+  max-height: 100dvh;
+} */
 
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

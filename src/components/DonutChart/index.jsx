@@ -2,7 +2,7 @@ import './style.css';
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
-export const DonutChart = ({ data }) => {
+export const DonutChart = ({ data, view }) => {
   const colors = {
     groceries: '#87CEEB',
     'eating-out': '#79CB9C',
@@ -61,11 +61,11 @@ export const DonutChart = ({ data }) => {
   console.log(filteredData);
 
   if (filteredData.length === 0) {
-    return <p>No data available for this month.</p>;
+    return <p>No data available for this month. </p>;
   }
 
   return (
-    <div>
+    <div className="donutchart-wrapper">
       <ResponsiveContainer width="100%" height={150}>
         <PieChart>
           <Pie
@@ -89,32 +89,34 @@ export const DonutChart = ({ data }) => {
             })}
           </Pie>
         </PieChart>
-
-        <ul className="list-of-categories">
-          {filteredData.map((entry, index) => {
-            return (
-              <li
-                key={`item${index}`}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  listStyleType: 'none',
-                }}
-              >
-                <span
+        <div className="label-wrapper">
+          <ul className="list-of-categories">
+            {filteredData.map((entry, index) => {
+              return (
+                <li
+                  key={`item${index}`}
                   style={{
-                    width: '1rem',
-                    height: '1rem',
-                    backgroundColor: colors[entry.id] || '#000000',
-                    marginRight: '0.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    listStyleType: 'none',
                   }}
-                ></span>
-                <span>{entry.label}</span>
-              </li>
-            );
-          })}
-        </ul>
+                >
+                  <span
+                    style={{
+                      width: '1rem',
+                      height: '1rem',
+                      backgroundColor: colors[entry.id] || '#000000',
+                      marginRight: '0.5rem',
+                    }}
+                  ></span>
+                  <span>{entry.label}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </ResponsiveContainer>
+      <p>{view}</p>
     </div>
   );
 };
