@@ -21,7 +21,7 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
     localStorage.setItem('items', JSON.stringify(localStorageItems));
     setSession((old) => ({ ...old, items: sessionItems }));
   };
-  
+
   const handleMinus = () => {
     const localStorageItems = JSON.parse(localStorage.getItem('items')) || [];
     const sessionIndex = localStorageItems.findIndex(
@@ -30,7 +30,7 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
 
     if (sessionId === -1) return;
     const sessionItems = localStorageItems[sessionIndex].items;
-    if (sessionItems[id].count === 1) {
+    if (sessionItems[id].count === 1 || sessionItems[id].count === undefined) {
       const isConfirmed = window.confirm(
         'Are you sure you want to delete this item?',
       );
@@ -50,7 +50,7 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
       <span className="session__item__others">
         <span className="item__count">{count}x</span>
         <span className="item__price">
-          <strong>{price}</strong>
+          <strong>{price} ,-</strong>
         </span>
         <span role="button" className="item__icon" onClick={handlePlus}>
           <AddBoxOutlinedIcon style={{ color: 'var(--primaryColor)' }} />

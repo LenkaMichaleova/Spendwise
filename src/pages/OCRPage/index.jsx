@@ -30,10 +30,19 @@ export const OCRPage = () => {
 
   const handleSave = () => {
     const selectedItems = items2.filter(item => item.selected);
-    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-    setSelectedTemporaryItems(selectedItems)
+    // localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    // setSelectedTemporaryItems(selectedItems)
+
+    const localStorageItems = JSON.parse(localStorage.getItem('items'));
+    const matchingSession = localStorageItems.filter((item) => item.id === sessionId)?.[0];
+    const currentItems = matchingSession.items ?? [];
+    matchingSession.items = [...currentItems, ...selectedItems];
+
+    localStorage.setItem("items", JSON.stringify(localStorageItems))
+
+    console.log(currentItems)
+    console.log(selectedItems)
   };
-  console.log(selectedTemporaryItems)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
