@@ -1,7 +1,8 @@
 import './style.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export const SessionItem = ({
   id,
@@ -9,10 +10,34 @@ export const SessionItem = ({
   price,
   count,
   setItems,
-  setItemCount,
+  // setItemCount,
+  setSession
 }) => {
+
+  const [itemCount, setItemCount] = useState()
+  const { sessionId } = useParams()
+
   const handlePlus = () => {
-    setItemCount(id, +1);
+
+    const localStorageItems = JSON.parse(localStorage.getItem('items'));
+    console.log("localStorageItems", localStorageItems)
+
+    const matchingSession = localStorageItems.filter(
+      (item) => item.id === sessionId,
+    )?.[0];
+    console.log("matching session",matchingSession)
+
+    const sessionItems = matchingSession.items
+    console.log("sessionItems", sessionItems)
+
+    const itemCount = sessionItems[id].count
+    console.log("itemCount", itemCount)
+    
+    
+    itemCount = ((old) => old + 1)
+    console.log("itemCount", uptdateCount)
+
+    setSession((old) => ({ ...old, count: sessionItems[id].count + 1 }))
   };
 
   const handleMinus = () => {

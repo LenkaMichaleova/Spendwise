@@ -1,6 +1,7 @@
 .ocr__item {
   width: 100%;
   padding: 3%;
+  
   background-color: var(--secondaryColor);
   border: none;
   border-radius: 0.5rem;

@@ -26,12 +26,6 @@
   gap: 0.5rem;
 }
 
-.session-menu:hover,
-.session-edit:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
 .session__items-box {
   width: 90vw;
   margin: 3% auto;
@@ -60,7 +54,6 @@
   
   color: var(--primaryColor);
   background-color: var(--secondaryColor);
-  
   border: none;
   border-radius: 0.5rem;
   box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.2);
@@ -92,12 +85,23 @@
   .session__items-box {
     width: 40vw;
     margin: 10px 0;
+    font-size: 1.3rem;
+  }
+
+  .session-menu:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .session-edit:hover {
+    cursor: pointer;
+    transform: scale(1.02);
   }
 
   .limit-price-wrapper {
     width: 30vw;
     right: 2rem;
-    top: 10rem;
+    top: 12rem;
 
     flex-direction: column;
     justify-content: space-evenly;
@@ -133,5 +137,10 @@
   .limit-edit {
     flex: 1;
     flex-wrap: nowrap;
+  }
+
+  .change-limit svg:hover {
+    transform: scale(1.2);
+    cursor: pointer;
   }
 }
