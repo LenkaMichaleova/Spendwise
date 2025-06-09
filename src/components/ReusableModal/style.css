@@ -36,11 +36,20 @@
 }
 
 @media (min-width: 800px) {
+  .reusable-modal{
+    padding: 1rem;
+  }
+
   .reusable-modal__content {
     padding: 0;
   }
 
   .form-header, .inputs {
     margin: 1rem;
+    width: 30vw;
+  }
+
+  .reusable-modal button {
+    width: 30vw;
   }
 }

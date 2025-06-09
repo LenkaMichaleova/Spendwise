@@ -29,8 +29,10 @@ export const ReusableModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    userName && localStorage.setItem('userName', userName.trim());
-
+    if (userName) {
+      localStorage.setItem('userName', userName.trim());
+      setIsModalOpen(false);
+    }
     const objectToSend = { name, price, tag, limit, id: crypto.randomUUID(), count: 1 };
     onSubmit(objectToSend);
 

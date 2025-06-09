@@ -30,7 +30,7 @@ export const SpeedDialTooltipOpen = ({ onSpendingClick, onSessionClick }) => {
           right: 16, 
           zIndex: 99,     
           '@media (min-width:800px)': {
-            right: '30vw',
+            right: '20%',
           }, 
         }}>
       <SpeedDial

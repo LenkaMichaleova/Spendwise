@@ -8,7 +8,9 @@ export const SpendingItem = ( {name, tag, price, icon, id} ) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`/Session/${id}`)
+    if (icon === "session") {
+      navigate(`/Session/${id}`)
+    }
   }
 
   return(
