@@ -40,10 +40,10 @@ export const ReusableModal = ({
       tag,
       limit,
       id: crypto.randomUUID(),
-      date: new Date().toISOString(), //toto som pridala
+      date: new Date().toISOString(), //
       count: 1,
     };
-    onSubmit(objectToSend);
+    onSubmit?.(objectToSend); //
 
     setName('');
     setPrice('');
