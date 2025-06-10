@@ -13,10 +13,10 @@
   gap: 10px;
 }
 
-.spending-item:hover {
-    transform: scale(1.01);
-    cursor: pointer;
-}
+/* .spending-item:hover { */
+  /* transform: scale(1.01); */
+  /* cursor: pointer;
+} */
 
 .spending-item__name {
   width: 60%;

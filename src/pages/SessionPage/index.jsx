@@ -78,19 +78,12 @@ export const SessionPage = () => {
     <div className="content">
       <BackButton path="/HomePage" />
       <div className="session-header">
-        <div className="session-edit">
-          <h1
-            onClick={() => {
-              setIsEditSessionModalOpen(!isEditSessionModalOpen);
-            }}
-          >
-            {sessionName}
-          </h1>
-          <EditOutlinedIcon
-            onClick={() => {
-              setIsEditSessionModalOpen(!isEditSessionModalOpen);
-            }}
-          />
+        <button className="session-edit"
+          onClick={() => {
+            setIsEditSessionModalOpen(!isEditSessionModalOpen);
+          }}>
+          <h1>{sessionName}</h1>
+          <EditOutlinedIcon/>
           <EditSessionModal
             isEditSessionModalOpen={isEditSessionModalOpen}
             setIsEditSessionModalOpen={setIsEditSessionModalOpen}
@@ -98,7 +91,7 @@ export const SessionPage = () => {
             setSession={setSession}
             sessionName={sessionName}
           />
-        </div>
+        </button>
         <div
           role="button"
           className="session-menu"

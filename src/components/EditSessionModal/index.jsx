@@ -33,7 +33,7 @@ export const EditSessionModal = ({
   };
 
   return (
-    <>
+    <div className='edit-session-modal'>
       <Dialog disableRestoreFocus open={isEditSessionModalOpen}>
         <form onSubmit={handleSubmit}>
           <div className="form-header">
@@ -63,6 +63,6 @@ export const EditSessionModal = ({
           </Button>
         </form>
       </Dialog>
-    </>
+    </div>
   );
 };

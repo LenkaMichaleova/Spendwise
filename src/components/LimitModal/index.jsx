@@ -36,7 +36,11 @@ export const LimitModal = ({
 
   return (
     <>
-      <Dialog disableRestoreFocus open={isLimitModalOpen}>
+      <Dialog 
+        disableRestoreFocus
+        open={isLimitModalOpen}
+        onClose={() => setIsLimitModalOpen(false)}
+        >
         <form onSubmit={handleSubmit}>
           <div className="form-header">
             <h3>Edit limit</h3>
