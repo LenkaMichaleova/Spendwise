@@ -22,7 +22,8 @@ export const SessionPage = () => {
   const { sessionId } = useParams();
 
   const localStorageItems = JSON.parse(localStorage.getItem('items')) ?? [];
-  const sessionItems = localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
+  const sessionItems =
+    localStorageItems?.find((item) => item.id === sessionId)?.items ?? [];
 
   const totalPrice = sessionItems.reduce((sum, item) => {
     return sum + item.price * item.count;
@@ -42,6 +43,7 @@ export const SessionPage = () => {
       matchingSession,
     );
     localStorage.setItem('items', JSON.stringify(localStorageItems));
+    setSession({ ...matchingSession });
   };
 
   useEffect(() => {
@@ -59,7 +61,17 @@ export const SessionPage = () => {
 
   useEffect(() => {
     if (session) {
-      setSession((old) => ({ ...old, price: totalPrice }));
+      setSession((old) => {
+        const updated = { ...old, price: totalPrice };
+        const index = localStorageItems.findIndex(
+          (item) => item.id === sessionId,
+        );
+        if (index !== -1) {
+          localStorageItems[index] = updated;
+          localStorage.setItem('items', JSON.stringify(localStorageItems));
+        }
+        return updated;
+      });
     }
   }, [totalPrice]);
 

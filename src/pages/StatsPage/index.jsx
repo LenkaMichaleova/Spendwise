@@ -8,7 +8,6 @@ export const StatsPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectedView, setSelectedView] = useState('Monthly');
   const localStorageItems = JSON.parse(localStorage.getItem('items')) || [];
-  console.log(localStorageItems);
 
   return (
     <div className="content">
