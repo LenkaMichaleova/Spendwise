@@ -13,24 +13,21 @@ export const OCRPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [items, setItems] = useState([]);
-  const [selectedTemporaryItems, setSelectedTemporaryItems] = useState([])
-  const [items2, setItems2] = useState([
-    {name:"houska", price: 40, description: "Velmi chutné pečivo", selected: false, count: 1},
-    {name: "rohlík", price: 3, description: "mňamka, která chutná každému", selected: false, count: 1},
-    {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes", selected: false, count: 1},
-  ]);
+  const [temporaryItems, setTemporaryItems] = useState(localStorage.getItem("temporary-items") || [])
 
   const {sessionId} = useParams()
   const navigate = useNavigate()
 
   const handleSelect = (index) => {
-    const newItems = [...items2];
+    const newItems = [...items];
     newItems[index].selected = !newItems[index].selected;
-    setItems2(newItems);
+    setItems
+    (newItems);
   };
 
   const handleSave = () => {
-    const selectedItems = items2.filter(item => item.selected);
+    const selectedItems = items
+    .filter(item => item.selected);
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter((item) => item.id === sessionId)?.[0];
     const currentItems = matchingSession.items ?? [];
@@ -54,9 +51,8 @@ export const OCRPage = () => {
       const prompt = `
         Zde je jídelní lístek:
         ${text}
-        Přečti prosím všechny položky z tohoto jídelního lístku a vrať mi je ve formátu JSON. Struktura by měla být: {"items": [{"name": "název jídla", "price": "cena", "description": "popis (pokud je k dispozici)"}]}. Pokud není cena jasná, nastav ji na null.
+        Přečti prosím všechny položky z tohoto jídelního lístku a vrať mi je ve formátu JSON. Struktura by měla být: {"items": [{"name": "název jídla", "price": "cena (jen číslo)", "currency": "měna","count":"počet (vždy 1)" "description": "popis (pokud je k dispozici)"}]}. Pokud není cena jasná, nastav ji na null.
       `;
-      console.log(prompt.split(" ").length)
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -80,10 +76,9 @@ export const OCRPage = () => {
       const parsedRedp = JSON.parse(resp)
       const itemsFromResp = parsedRedp.items
 
-      // localStorage.setItem("temporary-items",JSON.stringify(data.choices[0].message.content.items))
-      // console.log(data.choices[0].message.content.items)
-      // const temporaryItems = localStorage.getItem("temporary-items")
-      // console.log(temporaryItems)
+      localStorage.setItem("temporary-items",JSON.stringify(parsedRedp))
+      console.log(data.choices[0].message.content.items)
+      setTemporaryItems(JSON.parse(localStorage.getItem("temporary-items")) || [])
 
       const localStorageItems = JSON.parse(localStorage.getItem('items'));
       const matchingSession = localStorageItems.filter(
@@ -118,17 +113,22 @@ export const OCRPage = () => {
       }
     };
     handleOCR()
+    
   }, [image])
 
-  // useEffect(() => {
+  // !items && setTemporaryItems(localStorage.getItem("temporary-items") || [])
+  // console.log("temporary",temporaryItems)
+  console.log("items", temporaryItems.items)
 
-  // }, [selectedTemporaryItems])
+  // useEffect(() => {
+  
+  // }, [])
 
   return (
     <div className='content'>
       <BackButton path={`/Session/${sessionId}`}/>
       
-      {items2.length === 0 ?
+      {items.length === 0 || temporaryItems.length === 0 ?
       <>
         <div className='ocr-upload'>
           <label htmlFor="uploadCamera" className="ocr-upload__btn mobile-mode">
@@ -162,45 +162,60 @@ export const OCRPage = () => {
       </>
 
       :
+
       <>
         <div className='ocr__items-header'>
-        <div className='ocr-upload__inline'>
-          <label htmlFor="uploadCamera" className="mobile-mode">
-            <Camera color="var(--primaryColor)" size={35}/>
-          </label>
-          <input 
-            id="uploadCamera" 
-            className="hidden"
-            type="file" 
-            accept="image/*" 
-            capture="environment"
-            onChange={handleImageChange}
-          />
+          <div className='ocr-upload__inline'>
+            <label htmlFor="uploadCamera" className="mobile-mode">
+              <Camera color="var(--primaryColor)" size={35}/>
+            </label>
+            <input 
+              id="uploadCamera" 
+              className="hidden"
+              type="file" 
+              accept="image/*" 
+              capture="environment"
+              onChange={handleImageChange}
+            />
 
-          <label htmlFor="uploadFile">
-            <Upload color="var(--primaryColor)" size={30}/>
-          </label>
-          <input 
-            id='uploadFile' 
-            className='hidden' 
-            type="file" 
-            accept="image/*" 
-            onChange={handleImageChange}
-          />
-        </div>        </div>
+            <label htmlFor="uploadFile">
+              <Upload color="var(--primaryColor)" size={30}/>
+            </label>
+            <input 
+              id='uploadFile' 
+              className='hidden' 
+              type="file" 
+              accept="image/*" 
+              onChange={handleImageChange}
+            />
+          </div>
+        </div>
         <div className='ocr__items-box'>
 
-          {items2.map((item, index) =>
-            <OCRItem 
-              key={`${item.name}-${index}`} 
-              name={item.name} 
-              price={item.price} 
-              description={item.description}
-              selected={item.selected}
-              onSelect={() => handleSelect(index)}
-            />
-          )}
-          
+          {items ?     
+            items.map((item, index) =>
+              <OCRItem 
+                key={`${item.name}-${index}`} 
+                name={item.name} 
+                price={item.price} 
+                description={item.description}
+                selected={item.selected}
+                onSelect={() => handleSelect(index)}
+              />
+            )
+            :
+            temporaryItems.items.map((item, index) =>
+              <OCRItem 
+                key={`${item.name}-${index}`} 
+                name={item.name} 
+                price={item.price} 
+                description={item.description}
+                selected={item.selected}
+                onSelect={() => handleSelect(index)}
+              />
+            )
+          }
+
           <div className='ocr__save-items'>
             <ReusableBtn title="Save" type="submit" onClick={handleSave}/>
           </div>
