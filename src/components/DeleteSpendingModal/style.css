@@ -1,0 +1,29 @@
+.spending-delete-form{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  padding: 0.8rem;
+}
+
+.spending-delete-form .form-header {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+
+@media (min-width: 800px) {
+  .spending-delete-form {
+    max-width: 400px;
+  }
+
+  .spending-delete-form .form-header {
+    max-width: 300px;
+  }
+
+  .spending-delete-btn{
+    width: 200px;
+    margin: 0 auto;
+  }
+}

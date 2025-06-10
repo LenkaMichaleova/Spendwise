@@ -20,22 +20,22 @@ export const SpendingItem = ({ name, tag, price, icon, id, onDelete }) => {
       }`}
       onClick={handleClick}
     >
-      <span className="item__tag">
-        <Tag color={`var(--${tag})`} size={22} />
-      </span>
-      <span className="spending-item__name">{name}</span>
-      <span className="spending-item__others">
-        <span className="item__price">{price} Kč</span>
-        <span className="item__icon">
-          {icon === 'spendings' ? (
+      <span className="item__icon">
+        {icon === 'spendings' ? (
             <AddCardOutlinedIcon />
-          ) : (
-            <NightlifeOutlinedIcon />
-          )}
+        ) : (
+          <NightlifeOutlinedIcon />
+        )}
+      </span>      
+      <span className="spending-item__name">{name}</span>
+      
+      <span className="spending-item__others">
+        <span className="item__tag">
+          <Tag color={`var(--${tag})`} size={22} />
         </span>
-        <span
-          onClick={(e) => {
-            e.stopPropagation();
+        <span className="item__price">{price} Kč</span>
+        <span 
+          onClick={(e) => {e.stopPropagation();
             onDelete();
           }}
           className="item__delete"

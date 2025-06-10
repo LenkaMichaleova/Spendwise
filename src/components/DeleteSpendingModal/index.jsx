@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-
 import Dialog from '@mui/material/Dialog';
+import './style.css';
 
 export const DeleteSpendingModal = ({
   itemId,
@@ -24,11 +23,14 @@ export const DeleteSpendingModal = ({
   return (
     <>
       <Dialog
+        className='spending-delete-modal'
         disableRestoreFocus
         open={isDeleteSpendingModalOpen}
         onClose={() => setIsDeleteSpendingModalOpen(false)}
       >
-        <form onSubmit={handleSubmit}>
+        <form
+          className='spending-delete-form' 
+          onSubmit={handleSubmit}>
           <div className="form-header">
             <div className="close-btn">
               <CloseIcon onClick={() => setIsDeleteSpendingModalOpen(false)} />
@@ -36,7 +38,7 @@ export const DeleteSpendingModal = ({
           </div>
 
           <Button
-            className="save-btn"
+            className="spending-delete-btn"
             type="submit"
             variant="contained"
             style={{ backgroundColor: 'var(--primaryColor)' }}

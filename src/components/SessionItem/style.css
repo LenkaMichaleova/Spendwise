@@ -29,6 +29,11 @@
   gap: 1;
 }
 
+.session__item__others .item__icon{
+  display: flex;
+  align-items: center;
+}
+
 .item__icon:hover {
   transform: scale(1.1);
   cursor: pointer;

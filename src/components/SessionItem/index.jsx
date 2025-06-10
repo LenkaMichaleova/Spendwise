@@ -39,7 +39,6 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
       sessionItems.splice(id, 1);
     } else {
       sessionItems[id].count = Number(sessionItems[id].count) - 1;
-1;
     }
     localStorageItems[sessionIndex].items = sessionItems;
     localStorage.setItem('items', JSON.stringify(localStorageItems));
@@ -55,7 +54,8 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
           <strong>{price} ,-</strong>
         </span>
         <span role="button" className="item__icon" onClick={handlePlus}>
-          <AddBoxOutlinedIcon style={{ color: 'var(--primaryColor)' }} />
+          <AddBoxOutlinedIcon 
+            style={{ color: 'var(--primaryColor)' }} />
         </span>
         <span role="button" className="item__icon" onClick={handleMinus}>
           <IndeterminateCheckBoxOutlinedIcon

@@ -130,7 +130,7 @@ export const SessionPage = () => {
               <strong>
                 {session?.sessionLimit === 0
                   ? ' - '
-                  : `${session?.sessionLimit} Kč`}
+                  : `${session?.sessionLimit},-`}
               </strong>
             </span>
             <span>
