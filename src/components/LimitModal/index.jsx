@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
-
 import Dialog from '@mui/material/Dialog';
+import './style.css';
 
 export const LimitModal = ({
   isLimitModalOpen,
@@ -14,15 +13,14 @@ export const LimitModal = ({
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const newLimitValue = Number(e.target.limit.value);
     setIsLimitModalOpen(false);
-    // console.log(newLimitValue);
 
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter(
       (item) => item.id === sessionId,
     )?.[0];
-
     matchingSession.sessionLimit = newLimitValue;
 
     Object.assign(
@@ -37,6 +35,7 @@ export const LimitModal = ({
   return (
     <>
       <Dialog 
+        className='modal'
         disableRestoreFocus
         open={isLimitModalOpen}
         onClose={() => setIsLimitModalOpen(false)}

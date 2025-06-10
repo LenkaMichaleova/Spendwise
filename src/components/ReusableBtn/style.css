@@ -8,3 +8,9 @@
     width: 40vw;
   }
 }
+
+@media (min-width: 1800px) {
+  .reusable-modal .btn {
+    max-width: 400px;
+  }
+}

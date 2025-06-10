@@ -53,3 +53,12 @@
     width: 30vw;
   }
 }
+
+@media (min-width: 1800px) {
+  .reusable-modal {
+    margin: 0 auto;
+  }
+  .reusable-modal .inputs, .reusable-modal .form-header {
+    max-width: 400px;
+  }
+}

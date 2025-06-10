@@ -2,6 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
+import './style.css';
 
 export const EditSessionModal = ({
   isEditSessionModalOpen,
@@ -14,13 +15,11 @@ export const EditSessionModal = ({
     e.preventDefault();
     const newSessionName = e.target.sessionNameInput.value;
     setIsEditSessionModalOpen(false);
-    console.log(newSessionName);
 
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter(
       (item) => item.id === sessionId,
     )?.[0];
-
     matchingSession.sessionName = newSessionName;
 
     Object.assign(
@@ -34,7 +33,11 @@ export const EditSessionModal = ({
 
   return (
     <div className='edit-session-modal'>
-      <Dialog disableRestoreFocus open={isEditSessionModalOpen}>
+      <Dialog 
+        className='modal'
+        disableRestoreFocus 
+        open={isEditSessionModalOpen}
+        >
         <form onSubmit={handleSubmit}>
           <div className="form-header">
             <h3>Edit session name</h3>
