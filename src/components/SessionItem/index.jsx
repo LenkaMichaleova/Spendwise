@@ -15,7 +15,8 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
     if (sessionId === -1) return;
     const sessionItems = localStorageItems[sessionIndex].items;
     if (sessionItems[id]) {
-      sessionItems[id].count += 1;
+      console.log(typeof sessionItems[id].count)
+      sessionItems[id].count = Number(sessionItems[id].count) + 1;
     }
     localStorageItems[sessionIndex].items = sessionItems;
     localStorage.setItem('items', JSON.stringify(localStorageItems));
@@ -30,14 +31,15 @@ export const SessionItem = ({ id, name, price, count, setSession }) => {
 
     if (sessionId === -1) return;
     const sessionItems = localStorageItems[sessionIndex].items;
-    if (sessionItems[id].count === 1 || sessionItems[id].count === undefined) {
+    if (sessionItems[id].count == 1 || sessionItems[id].count === undefined) {
       const isConfirmed = window.confirm(
         'Are you sure you want to delete this item?',
       );
       if (!isConfirmed) return;
       sessionItems.splice(id, 1);
     } else {
-      sessionItems[id].count -= 1;
+      sessionItems[id].count = Number(sessionItems[id].count) - 1;
+1;
     }
     localStorageItems[sessionIndex].items = sessionItems;
     localStorage.setItem('items', JSON.stringify(localStorageItems));

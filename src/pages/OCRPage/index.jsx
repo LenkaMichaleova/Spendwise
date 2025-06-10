@@ -13,7 +13,7 @@ export const OCRPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [items, setItems] = useState([]);
-  const [temporaryItems, setTemporaryItems] = useState(localStorage.getItem("temporary-items") || [])
+  // const [temporaryItems, setTemporaryItems] = useState(localStorage.getItem("temporary-items") || [])
 
   const {sessionId} = useParams()
   const navigate = useNavigate()
@@ -76,9 +76,9 @@ export const OCRPage = () => {
       const parsedRedp = JSON.parse(resp)
       const itemsFromResp = parsedRedp.items
 
-      localStorage.setItem("temporary-items",JSON.stringify(parsedRedp))
-      console.log(data.choices[0].message.content.items)
-      setTemporaryItems(JSON.parse(localStorage.getItem("temporary-items")) || [])
+      // localStorage.setItem("temporary-items",JSON.stringify(parsedRedp))
+      // console.log(data.choices[0].message.content.items)
+      // setTemporaryItems(JSON.parse(localStorage.getItem("temporary-items")) || [])
 
       const localStorageItems = JSON.parse(localStorage.getItem('items'));
       const matchingSession = localStorageItems.filter(
@@ -118,17 +118,22 @@ export const OCRPage = () => {
 
   // !items && setTemporaryItems(localStorage.getItem("temporary-items") || [])
   // console.log("temporary",temporaryItems)
-  console.log("items", temporaryItems.items)
+  // console.log("items", temporaryItems.items)
 
-  // useEffect(() => {
-  
-  // }, [])
+  useEffect(() => {
+    const localStorageItems = JSON.parse(localStorage.getItem('items'));
+    const matchingSession = localStorageItems.filter((item) => item.id === sessionId)?.[0];
+
+    setItems(matchingSession?.temporaryItems)
+    // localStorage.getItem("")
+    console.log(items)
+  }, [])
 
   return (
     <div className='content'>
       <BackButton path={`/Session/${sessionId}`}/>
       
-      {items.length === 0 || temporaryItems.length === 0 ?
+      {items?.length === 0 || items === undefined ?
       <>
         <div className='ocr-upload'>
           <label htmlFor="uploadCamera" className="ocr-upload__btn mobile-mode">
@@ -192,19 +197,7 @@ export const OCRPage = () => {
         </div>
         <div className='ocr__items-box'>
 
-          {items ?     
-            items.map((item, index) =>
-              <OCRItem 
-                key={`${item.name}-${index}`} 
-                name={item.name} 
-                price={item.price} 
-                description={item.description}
-                selected={item.selected}
-                onSelect={() => handleSelect(index)}
-              />
-            )
-            :
-            temporaryItems.items.map((item, index) =>
+          {items?.map((item, index) =>
               <OCRItem 
                 key={`${item.name}-${index}`} 
                 name={item.name} 
