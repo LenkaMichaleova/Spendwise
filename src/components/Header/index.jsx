@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import './style.css';
+import { useState } from 'react';
 import { CircleUserRound } from 'lucide-react';
 import { ReusableModal } from '../ReusableModal';
 

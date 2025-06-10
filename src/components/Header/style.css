@@ -66,4 +66,8 @@
     flex-direction: row-reverse;
     gap: 1rem;
   }
+
+  .app-header--right .name {
+    font-size: 1.2rem;
+  }
 }
