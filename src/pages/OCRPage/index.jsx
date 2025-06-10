@@ -3,7 +3,7 @@ import Tesseract from 'tesseract.js';
 import './style.css';
 import { BackButton } from '../../components/BackButton';
 import { OCRItem } from '../../components/OCRItem';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ReusableBtn } from '../../components/ReusableBtn';
 import { OCRUpload } from '../../components/OCRUpload';
 import { Camera, Upload } from 'lucide-react'
@@ -15,12 +15,13 @@ export const OCRPage = () => {
   const [items, setItems] = useState([]);
   const [selectedTemporaryItems, setSelectedTemporaryItems] = useState([])
   const [items2, setItems2] = useState([
-    {name:"houska", price: 40, description: "Velmi chutné pečivo", selected: false},
-    {name: "rohlík", price: 3, description: "mňamka, která chutná každému", selected: false},
-    {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes", selected: false},
+    {name:"houska", price: 40, description: "Velmi chutné pečivo", selected: false, count: 1},
+    {name: "rohlík", price: 3, description: "mňamka, která chutná každému", selected: false, count: 1},
+    {name: "uzené koleno", price: 480, description: "vystřelí vás do nebes", selected: false, count: 1},
   ]);
 
   const {sessionId} = useParams()
+  const navigate = useNavigate()
 
   const handleSelect = (index) => {
     const newItems = [...items2];
@@ -30,18 +31,13 @@ export const OCRPage = () => {
 
   const handleSave = () => {
     const selectedItems = items2.filter(item => item.selected);
-    // localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-    // setSelectedTemporaryItems(selectedItems)
-
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter((item) => item.id === sessionId)?.[0];
     const currentItems = matchingSession.items ?? [];
     matchingSession.items = [...currentItems, ...selectedItems];
 
     localStorage.setItem("items", JSON.stringify(localStorageItems))
-
-    console.log(currentItems)
-    console.log(selectedItems)
+    navigate(`/Session/${sessionId}`)
   };
 
   const handleImageChange = (e) => {
