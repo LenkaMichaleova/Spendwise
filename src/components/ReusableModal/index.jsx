@@ -85,6 +85,7 @@ export const ReusableModal = ({
                   id="outlined-basic"
                   label="Name"
                   variant="outlined"
+                  inputProps={{ maxLength: 20 }}
                 />
               )}
 
@@ -97,6 +98,7 @@ export const ReusableModal = ({
                   label="Price"
                   value={price}
                   variant="outlined"
+                  inputProps={{ min: 0, max: 99999 }}                
                 />
               )}
 
@@ -133,6 +135,7 @@ export const ReusableModal = ({
                   id="outlined-basic"
                   label="Limit"
                   variant="outlined"
+                  inputProps={{ min:0, max: 99999 }}
                 />
               )}
 
@@ -146,6 +149,7 @@ export const ReusableModal = ({
                   id="outlined-basic"
                   label="Name"
                   variant="outlined"
+                  inputProps={{ maxLength: 15 }}
                 />
               )}
 

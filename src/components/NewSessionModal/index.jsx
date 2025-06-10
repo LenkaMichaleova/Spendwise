@@ -58,6 +58,7 @@ export const NewSessionModal = ({
                 id="outlined-basic"
                 label="Session name"
                 variant="outlined"
+                inputProps={{ maxLength: 20 }}
               />
 
               <TextField
@@ -69,6 +70,7 @@ export const NewSessionModal = ({
                 id="outlined-basic"
                 label="limit"
                 variant="outlined"
+                inputProps={{ min:0, max: 99999 }}
               />
 
               <ReusableBtn title="Save" type="submit" disabled={!isDisabled} />

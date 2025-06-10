@@ -1,10 +1,10 @@
+import './style.css';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import { BackButton } from '../../components/BackButton';
 import { SessionItem } from '../../components/SessionItem';
 import { ReusableBtn } from '../../components/ReusableBtn';
 import { ReusableModal } from '../../components/ReusableModal';
-import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { LimitDonut } from '../../components/LimitDonut';
@@ -56,42 +56,33 @@ export const SessionPage = () => {
 
   const sessionLimit = session?.sessionLimit;
   const sessionName = session?.sessionName;
-  // const sessionTotal = session?.price;
-
-  useEffect(() => {
-    if (session) {
-      setSession((old) => {
-        const updated = { ...old, price: totalPrice };
-        const index = localStorageItems.findIndex(
-          (item) => item.id === sessionId,
-        );
-        if (index !== -1) {
-          localStorageItems[index] = updated;
-          localStorage.setItem('items', JSON.stringify(localStorageItems));
-        }
-        return updated;
-      });
-    }
-  }, [totalPrice]);
 
   return (
     <div className="content session-content">
       <BackButton path="/HomePage" />
       <div className="session-header">
-        <button className="session-edit"
-          onClick={() => {
-            setIsEditSessionModalOpen(!isEditSessionModalOpen);
-          }}>
-          <h1>{sessionName}</h1>
-          <EditOutlinedIcon/>
+        <div className="session-edit"
+
+          >
+          <h1
+            onClick={() => {
+              setIsEditSessionModalOpen(!isEditSessionModalOpen);
+            }}>
+            {sessionName}
+          </h1>
+          <EditOutlinedIcon 
+            onClick={() => {
+              setIsEditSessionModalOpen(!isEditSessionModalOpen);
+            }}
+          />
           <EditSessionModal
             isEditSessionModalOpen={isEditSessionModalOpen}
-            setIsEditSessionModalOpen={setIsEditSessionModalOpen}
+            setIsEditSessionModalOpen={!setIsEditSessionModalOpen}
             sessionId={sessionId}
             setSession={setSession}
             sessionName={sessionName}
           />
-        </button>
+        </div>
         <div
           role="button"
           className="session-menu"

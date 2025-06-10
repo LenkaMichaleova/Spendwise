@@ -42,6 +42,7 @@ export const AddSpending = ({ isModalOpen, setIsModalOpen }) => {
                 id="outlined-basic"
                 label="Name"
                 variant="outlined"
+                inputProps={{ maxLength: 20 }}
               />
 
               <TextField
@@ -52,6 +53,7 @@ export const AddSpending = ({ isModalOpen, setIsModalOpen }) => {
                 label="Price"
                 value={price}
                 variant="outlined"
+                inputProps={{ maxLength: 5 }}
               />
 
               <FormControl className="input">

@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import Tesseract from 'tesseract.js';
 import './style.css';
+import Tesseract from 'tesseract.js';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';
 import { OCRItem } from '../../components/OCRItem';
-import { useNavigate, useParams } from 'react-router-dom';
 import { ReusableBtn } from '../../components/ReusableBtn';
-import { OCRUpload } from '../../components/OCRUpload';
 import { Camera, Upload } from 'lucide-react'
 
 export const OCRPage = () => {
@@ -13,7 +12,6 @@ export const OCRPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [items, setItems] = useState([]);
-  // const [temporaryItems, setTemporaryItems] = useState(localStorage.getItem("temporary-items") || [])
 
   const {sessionId} = useParams()
   const navigate = useNavigate()
@@ -76,10 +74,6 @@ export const OCRPage = () => {
       const parsedRedp = JSON.parse(resp)
       const itemsFromResp = parsedRedp.items
 
-      // localStorage.setItem("temporary-items",JSON.stringify(parsedRedp))
-      // console.log(data.choices[0].message.content.items)
-      // setTemporaryItems(JSON.parse(localStorage.getItem("temporary-items")) || [])
-
       const localStorageItems = JSON.parse(localStorage.getItem('items'));
       const matchingSession = localStorageItems.filter(
         (item) => item.id === sessionId,
@@ -116,17 +110,11 @@ export const OCRPage = () => {
     
   }, [image])
 
-  // !items && setTemporaryItems(localStorage.getItem("temporary-items") || [])
-  // console.log("temporary",temporaryItems)
-  // console.log("items", temporaryItems.items)
-
   useEffect(() => {
     const localStorageItems = JSON.parse(localStorage.getItem('items'));
     const matchingSession = localStorageItems.filter((item) => item.id === sessionId)?.[0];
 
     setItems(matchingSession?.temporaryItems)
-    // localStorage.getItem("")
-    console.log(items)
   }, [])
 
   return (

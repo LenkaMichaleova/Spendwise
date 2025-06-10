@@ -13,6 +13,7 @@ export const EditSessionModal = ({
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const newSessionName = e.target.sessionNameInput.value;
     setIsEditSessionModalOpen(false);
 
@@ -35,7 +36,6 @@ export const EditSessionModal = ({
     <div className='edit-session-modal'>
       <Dialog 
         className='modal'
-        disableRestoreFocus 
         open={isEditSessionModalOpen}
         >
         <form onSubmit={handleSubmit}>
@@ -54,6 +54,7 @@ export const EditSessionModal = ({
             label="Name"
             variant="outlined"
             defaultValue={sessionName}
+            inputProps={{ maxLength: 20 }}
           />
 
           <Button

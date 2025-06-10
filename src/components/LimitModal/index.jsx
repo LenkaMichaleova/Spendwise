@@ -56,6 +56,7 @@ export const LimitModal = ({
             label="Limit"
             variant="outlined"
             defaultValue={sessionLimit}
+            inputProps={{ maxLength: 5 }}
           />
 
           <Button
