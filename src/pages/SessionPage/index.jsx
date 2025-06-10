@@ -56,7 +56,7 @@ export const SessionPage = () => {
 
   const sessionLimit = session?.sessionLimit;
   const sessionName = session?.sessionName;
-  const sessionTotal = session?.price;
+  // const sessionTotal = session?.price;
 
   useEffect(() => {
     if (session) {

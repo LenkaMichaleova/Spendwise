@@ -4,7 +4,7 @@ import { CircleUserRound } from 'lucide-react';
 import { ReusableModal } from '../ReusableModal';
 
 export const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <header className="app-header">
@@ -13,17 +13,21 @@ export const Header = () => {
         <h1>Spendwise</h1>
       </div>
       <div className="app-header--right">
-        <div className="menu" role='button' onClick={() => setIsModalOpen(true)}>
+        <div
+          className="menu"
+          role="button"
+          onClick={() => setIsModalOpen(true)}
+        >
           <CircleUserRound color="var(--primaryColor)" size={40} />
         </div>
         <div className="name">{localStorage.getItem('userName')}</div>
       </div>
       <ReusableModal
-        title="User name" 
-        isModalOpen={isModalOpen} 
-        setIsModalOpen={setIsModalOpen} 
+        title="Username"
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
         username={true}
       />
     </header>
-  )
+  );
 };
