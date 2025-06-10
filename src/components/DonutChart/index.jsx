@@ -106,13 +106,16 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
                 >
                   <span
                     style={{
-                      width: '1rem',
-                      height: '1rem',
+                      display: 'block',
+                      maxWidth: '16px',
+                      width: '16px',
+                      height: '16px',
                       backgroundColor: colors[entry.id] || '#000000',
-                      marginRight: '0.5rem',
                     }}
                   ></span>
-                  <span style={{ fontSize: '14px' }}>{entry.label}</span>
+                  <span style={{ fontSize: '14px', paddingLeft: '0.5em' }}>
+                    {entry.label}
+                  </span>
                 </li>
               );
             })}
