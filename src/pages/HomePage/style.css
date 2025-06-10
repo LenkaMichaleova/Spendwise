@@ -11,7 +11,7 @@
 
 @media (min-width: 800px) {
   .spendings {
-    width: 50%;
+    width: 60%;
     max-height: 80vh;
     overflow-x: hidden;
     overflow-y: auto;

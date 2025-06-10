@@ -75,7 +75,7 @@ export const SessionPage = () => {
   }, [totalPrice]);
 
   return (
-    <div className="content">
+    <div className="content session-content">
       <BackButton path="/HomePage" />
       <div className="session-header">
         <button className="session-edit"

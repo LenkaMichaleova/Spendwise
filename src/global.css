@@ -46,7 +46,6 @@ body {
 
 .app-main {
   display: flex;
-  /* position: relative; */
   justify-content: center;
 }
 

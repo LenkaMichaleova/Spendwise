@@ -1,3 +1,8 @@
+.session-content .back-btn{
+  padding: 1.5rem;
+  margin: 0;
+}
+
 .session-header {
   display: flex;
   justify-content: space-between;
@@ -36,13 +41,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 10rem;
 }
 
 .limit-price-wrapper {
   z-index: 99;
   width: 90vw;
   padding: 1%;
-  position: absolute;
+  position: fixed;
   bottom: 4rem;
 
   display: flex;
@@ -74,15 +80,31 @@
 }
 
 @media (min-width: 800px) {
+  .session-content{
+    margin-bottom: 0;
+  }
+
   .session-header {
     width: 40vw;
-    padding: 0;
+    padding: 0 2rem;
+  }
+
+  .session-btn {
+    padding: 0 2rem;
+    width: 40vw;
   }
 
   .session__items-box {
     width: 40vw;
-    margin: 10px 0;
-    font-size: 1.1rem;
+    margin: 0;
+
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    padding: 2rem;
+    margin-top: -1rem;
+    margin-bottom: 0;
   }
 
   .session-menu:hover {
@@ -139,5 +161,11 @@
   .change-limit svg:hover {
     transform: scale(1.2);
     cursor: pointer;
+  }
+}
+
+@media (min-width: 1200px) {
+  .session__items-box {
+    font-size: 1.1rem;
   }
 }

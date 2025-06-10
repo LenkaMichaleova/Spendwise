@@ -7,6 +7,10 @@
   .btn {
     width: 40vw;
   }
+
+  .session-btn .btn {
+    width: 100%;
+  }
 }
 
 @media (min-width: 1800px) {

@@ -9,7 +9,7 @@ export const OCRItem = ( {name, price, description, selected, onSelect} ) => {
       <div className='ocr__item--prvni-radek'> 
         <span className='ocr__item__name'>{name}</span>
         <span className='ocr__item__others'>
-            <span className='item__price'>{price} ,-</span>
+            <span className='item__price'>{price},-</span>
             <span className='item__icon'>
             <Checkbox {...label} 
               style={{padding: 0}} 
