@@ -37,7 +37,7 @@ export const BarGraph = ({ data, view }) => {
   }
 
   const chartData = spendingPerDay.map((amount, index) => ({
-    day: (index + 1).toString(),
+    day: `${(index + 1).toString()}`,
     amount: amount,
   }));
 
@@ -56,7 +56,11 @@ export const BarGraph = ({ data, view }) => {
             stroke="red"
             strokeDasharray="3 3"
           />
-          <Tooltip />
+          <Tooltip
+            formatter={(value) => [`${value} Kč`, 'Price']}
+            labelFormatter={(label) => `Day: ${label}`}
+          />
+
           <Bar dataKey="amount" fill="#123150" />
         </BarChart>
       </ResponsiveContainer>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './style.css';
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
@@ -11,7 +12,6 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
     other: '#CCCCCC',
   };
 
-  console.log('Here is you dream data', data);
   const currentDay = new Date().getDate();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
@@ -56,16 +56,15 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
   }));
 
   const filteredData = chartData.filter((item) => item.price > 0);
-  console.log(filteredData);
+
+  useEffect(() => {
+    const total = filteredData.reduce((sum, item) => sum + item.price, 0);
+    setTotalPrice(total);
+  }, [filteredData, setTotalPrice]);
 
   if (filteredData.length === 0) {
     return <p>No data available for this month. </p>;
   }
-
-  const overallPrice = filteredData.reduce((sum, item) => sum + item.price, 0);
-  console.log('Total Monthly Spending:', overallPrice);
-
-  setTotalPrice(overallPrice);
 
   return (
     <div className="donutchart-wrapper">

@@ -57,7 +57,6 @@ export const SessionPage = () => {
   const sessionLimit = session?.sessionLimit;
   const sessionName = session?.sessionName;
   const sessionTotal = session?.price;
-  console.log('This is current price', sessionTotal);
 
   useEffect(() => {
     if (session) {
