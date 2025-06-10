@@ -130,7 +130,7 @@ export const OCRPage = () => {
   }, [])
 
   return (
-    <div className='content'>
+    <div className='content ocr-content'>
       <BackButton path={`/Session/${sessionId}`}/>
       
       {items?.length === 0 || items === undefined ?

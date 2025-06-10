@@ -1,3 +1,7 @@
+.ocr-content .back-btn{
+  padding: 1.5rem;
+}
+
 .ocr-page {
   display: flex;
   flex-direction: column;
