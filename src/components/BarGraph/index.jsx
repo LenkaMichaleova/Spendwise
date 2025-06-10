@@ -44,13 +44,34 @@ export const BarGraph = ({ data, view }) => {
   const totalSpending = spendingPerDay.reduce((sum, val) => sum + val, 0);
   const averageSpending = totalSpending / spendingPerDay.length;
 
+  const priceFormatter = (number) => {
+    return number.toString() + ' Kč';
+  };
+
+  const dateFormatter = (dayInMonth) => {
+    const date = new Date(currentYear, currentMonth, dayInMonth);
+    return date.toLocaleDateString('cs-CZ', {
+      day: '2-digit',
+      month: '2-digit',
+    });
+  };
+
   return (
     <div className="bargraph-wrapper" style={{ width: '100%', height: 170 }}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" interval={1} tick={{ fontSize: 10 }} />
-          <YAxis />
+          <XAxis
+            dataKey="day"
+            interval={1}
+            tick={{
+              fontSize: 10,
+              angle: -45,
+              textAnchor: 'end',
+            }}
+            tickFormatter={dateFormatter}
+          />
+          <YAxis tickFormatter={priceFormatter} tick={{ fontSize: 12 }} />
           <ReferenceLine
             y={averageSpending}
             stroke="red"
@@ -58,7 +79,7 @@ export const BarGraph = ({ data, view }) => {
           />
           <Tooltip
             formatter={(value) => [`${value} Kč`, 'Price']}
-            labelFormatter={(label) => `Day: ${label}`}
+            labelFormatter={(label) => `Date: ${dateFormatter(label)}`}
           />
 
           <Bar dataKey="amount" fill="#123150" />

@@ -101,6 +101,7 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
                     display: 'flex',
                     alignItems: 'center',
                     listStyleType: 'none',
+                    paddingBottom: '6px',
                   }}
                 >
                   <span
@@ -111,7 +112,7 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
                       marginRight: '0.5rem',
                     }}
                   ></span>
-                  <span>{entry.label}</span>
+                  <span style={{ fontSize: '14px' }}>{entry.label}</span>
                 </li>
               );
             })}
