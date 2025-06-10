@@ -161,7 +161,7 @@ export const SessionPage = () => {
         <div className="price-wrapper">
           <div>Total:</div>
           <div>
-            <strong>{totalPrice}</strong> Kč
+            <strong>{totalPrice}</strong> ,-
           </div>
         </div>
       </div>

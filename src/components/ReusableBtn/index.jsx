@@ -8,7 +8,7 @@ export const ReusableBtn = ( {title, type, onClick, disabled} ) => {
         className="btn"
         type={type}
         variant="contained"
-        style={{ backgroundColor: 'var(--primaryColor)' }}
+        style={{ backgroundColor: disabled ? "var(--secondaryColor)" : "var(--primaryColor)" }}
         onClick={onClick}
         >
         {title}
