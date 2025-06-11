@@ -1,5 +1,5 @@
 import './style.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -53,7 +53,7 @@ export const AddSpending = ({ isModalOpen, setIsModalOpen }) => {
                 label="Price"
                 value={price}
                 variant="outlined"
-                inputProps={{ maxLength: 5 }}
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxLength: 5 }}
               />
 
               <FormControl className="input">

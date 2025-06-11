@@ -13,7 +13,6 @@ export const NewSessionModal = ({
 }) => {
   const [sessionName, setSessionName] = useState('Session');
   const [sessionLimit, setSessionLimit] = useState(0);
-
   const isDisabled = !!sessionName;
 
   const handleSubmit = (e) => {
@@ -26,7 +25,7 @@ export const NewSessionModal = ({
       sessionLimit: Number(sessionLimit),
       id: crypto.randomUUID(),
       date: new Date().toISOString(),
-    }; //pridané
+    };
     onSubmit(objectToSend);
 
     setIsModalOpen(false);
@@ -70,7 +69,7 @@ export const NewSessionModal = ({
                 id="outlined-basic"
                 label="limit"
                 variant="outlined"
-                inputProps={{ min:0, max: 99999 }}
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxLength: 5 }}
               />
 
               <ReusableBtn title="Save" type="submit" disabled={!isDisabled} />

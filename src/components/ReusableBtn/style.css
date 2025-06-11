@@ -11,10 +11,18 @@
   .session-btn .btn {
     width: 100%;
   }
+
+  .ocr__save-items .btn{
+    width: 15%;
+  }
 }
 
 @media (min-width: 1800px) {
   .reusable-modal .btn {
     max-width: 400px;
+  }
+
+  .ocr__save-items .btn{
+    width: 20%;
   }
 }

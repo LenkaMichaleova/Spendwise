@@ -1,3 +1,4 @@
+import './style.css';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -5,7 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import CloseIcon from '@mui/icons-material/Close';
 import Dialog from '@mui/material/Dialog';
-import './style.css';
 import { useState } from 'react';
 import { ReusableBtn } from '../ReusableBtn';
 
@@ -24,7 +24,6 @@ export const ReusableModal = ({
   const [price, setPrice] = useState('');
   const [tag, setTag] = useState('');
   const [limit, setLimit] = useState(null);
-
   const [userName, setUserName] = useState(localStorage.getItem('userName'));
 
   const handleSubmit = (e) => {
@@ -40,10 +39,10 @@ export const ReusableModal = ({
       tag,
       limit,
       id: crypto.randomUUID(),
-      date: new Date().toISOString(), //
+      date: new Date().toISOString(),
       count: 1,
     };
-    onSubmit?.(objectToSend); //
+    onSubmit?.(objectToSend);
 
     setName('');
     setPrice('');
@@ -98,8 +97,7 @@ export const ReusableModal = ({
                   label="Price"
                   value={price}
                   variant="outlined"
-                  inputProps={{ min: 0, max: 99999 }}                
-                />
+                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxLength: 5 }}/>
               )}
 
               {itemTag && (
@@ -135,7 +133,7 @@ export const ReusableModal = ({
                   id="outlined-basic"
                   label="Limit"
                   variant="outlined"
-                  inputProps={{ min:0, max: 99999 }}
+                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxLength: 5 }}
                 />
               )}
 

@@ -15,6 +15,12 @@
   gap: 2rem;
 }
 
+.ocr-upload__inline {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
 .ocr-upload__btn {
   padding: 4%;
   background-color: var(--secondaryColor);
@@ -69,6 +75,10 @@
   .ocr-page {
     width: 80%;
     padding-right: 10%;
+  }
+
+  .ocr-upload__inline {
+    width: 10vw;
   }
 
   .ocr-upload__btn {
