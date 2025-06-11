@@ -34,9 +34,12 @@ export const EditSessionModal = ({
 
   return (
     <div className='edit-session-modal'>
-      <Dialog 
+      <Dialog
+        // disableRestoreFocus
         className='modal'
         open={isEditSessionModalOpen}
+        onClose={() => setIsEditSessionModalOpen(false)}
+
         >
         <form onSubmit={handleSubmit}>
           <div className="form-header">

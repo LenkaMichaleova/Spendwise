@@ -77,7 +77,7 @@ export const SessionPage = () => {
           />
           <EditSessionModal
             isEditSessionModalOpen={isEditSessionModalOpen}
-            setIsEditSessionModalOpen={!setIsEditSessionModalOpen}
+            setIsEditSessionModalOpen={setIsEditSessionModalOpen}
             sessionId={sessionId}
             setSession={setSession}
             sessionName={sessionName}
