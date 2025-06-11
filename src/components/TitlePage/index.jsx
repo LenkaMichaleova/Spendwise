@@ -57,6 +57,7 @@ export const TitlePage = () => {
               id="outlined-basic"
               label="Set username"
               variant="outlined"
+              inputProps={{ maxLength: 20 }}
             />
 
             <p className="error-text">{error && 'Please set your username'}</p>
