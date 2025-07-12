@@ -20,9 +20,7 @@ export const StatsPage = () => {
           setSelectedView={setSelectedView}
         />
       </div>
-      {selectedView === 'Monthly' && (
-        <BarGraph data={localStorageItems} view={selectedView} />
-      )}
+      <BarGraph data={localStorageItems} view={selectedView} />
       <DonutChart
         data={localStorageItems}
         view={selectedView}

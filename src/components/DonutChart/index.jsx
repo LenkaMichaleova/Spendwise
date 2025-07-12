@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import './style.css';
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { getWeek } from 'date-fns';
 
 export const DonutChart = ({ data, view, setTotalPrice }) => {
   const colors = {
@@ -14,6 +15,8 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
 
   const currentDay = new Date().getDate();
   const currentMonth = new Date().getMonth();
+  const currentDate = new Date();
+  const currentWeekNumber = getWeek(currentDate, { weekStartsOn: 1 });
   const currentYear = new Date().getFullYear();
 
   const tags = [
@@ -28,6 +31,7 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
 
   for (let i = 0; i < data.length; i++) {
     const date = new Date(data[i].date);
+    const weekNumber = getWeek(date, { weekStartsOn: 1 });
     let include = false;
 
     if (view === 'Monthly') {
@@ -36,6 +40,11 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
     } else if (view === 'Daily') {
       include =
         date.getDate() === currentDay &&
+        date.getMonth() === currentMonth &&
+        date.getFullYear() === currentYear;
+    } else if (view === 'Weekly') {
+      include =
+        weekNumber === currentWeekNumber &&
         date.getMonth() === currentMonth &&
         date.getFullYear() === currentYear;
     }
@@ -62,8 +71,14 @@ export const DonutChart = ({ data, view, setTotalPrice }) => {
     setTotalPrice(total);
   }, [filteredData, setTotalPrice]);
 
+  const period = {
+    Monthly: 'month',
+    Weekly: 'week',
+    Daily: 'day',
+  };
+
   if (filteredData.length === 0) {
-    return <p>No data available for this month. </p>;
+    return <p>No data available for this {period[view]}.</p>;
   }
 
   return (
