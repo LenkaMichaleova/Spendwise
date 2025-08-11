@@ -24,6 +24,7 @@ export const OverviewForm = ({ selectedView, setSelectedView }) => {
         >
           <MenuItem value="Monthly">Monthly</MenuItem>
           <MenuItem value="Daily">Daily</MenuItem>
+          <MenuItem value="Weekly">Weekly</MenuItem>
         </Select>
       </FormControl>
     </div>
